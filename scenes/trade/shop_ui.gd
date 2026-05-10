@@ -1,9 +1,15 @@
 class_name ShopUI extends CanvasLayer
 
+signal buy_button_pressed(trade_item: Enums.TradeItem)
+signal sell_button_pressed(trade_item: Enums.TradeItem)
+
 @onready var inventory_items: VBoxContainer = %InventoryItems
 @onready var sale_items: VBoxContainer = %SaleItems
 @onready var buy_items: VBoxContainer = %BuyItems
 @onready var shop_name_label: Label = %ShopName
+
+const SHOP_BUTTON = preload("uid://brqfslk3rb0lk")
+
 
 func populate(trading_post: TradingPost):
 	var trade_inventory = trading_post.trade_inventory
@@ -36,8 +42,11 @@ func populate(trading_post: TradingPost):
 		item_price_label.text = "$%d" % price
 		var name_label = Label.new()
 		name_label.text = Enums.TradeItem.find_key(item)
+		var buy_button: Button = SHOP_BUTTON.instantiate()
+		buy_button.pressed.connect(func(): buy_button_pressed.emit(item))
 		h_box_container.add_child(item_price_label)
 		h_box_container.add_child(name_label)
+		h_box_container.add_child(buy_button)
 		sale_items.add_child(h_box_container)
 		
 		
@@ -50,8 +59,12 @@ func populate(trading_post: TradingPost):
 		item_price_label.text = "$%d" % price
 		var name_label = Label.new()
 		name_label.text = Enums.TradeItem.find_key(item)
+		var sell_button: Button = SHOP_BUTTON.instantiate()
+		sell_button.pressed.connect(func(): sell_button_pressed.emit(item))
+		sell_button.text = "Sell"
 		h_box_container.add_child(item_price_label)
 		h_box_container.add_child(name_label)
+		h_box_container.add_child(sell_button)
 		buy_items.add_child(h_box_container)
 
 func _new_centered_h_box_container() -> HBoxContainer:

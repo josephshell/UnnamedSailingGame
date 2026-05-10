@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b665daxdyt8i5"]
 
 [ext_resource type="Script" uid="uid://d0x8exdetqm1e" path="res://scenes/trade/shop_ui.gd" id="1_slvno"]
+[ext_resource type="PackedScene" uid="uid://brqfslk3rb0lk" path="res://scenes/trade/shop_button.tscn" id="2_bb5rw"]
 
 [node name="ShopUI" type="CanvasLayer" unique_id=2123106438]
 script = ExtResource("1_slvno")
@@ -70,6 +71,9 @@ text = "$10"
 layout_mode = 2
 text = "Item 1"
 
+[node name="ShopButton" parent="PanelContainer/MarginContainer/VBoxContainer/SaleItems/HBoxContainer" unique_id=1700510820 instance=ExtResource("2_bb5rw")]
+layout_mode = 2
+
 [node name="BuyingDivider" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=117780143]
 layout_mode = 2
 text = "BUYING"
@@ -90,3 +94,7 @@ text = "$10"
 [node name="ItemLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/BuyItems/HBoxContainer2" unique_id=1835316338]
 layout_mode = 2
 text = "Item 2"
+
+[node name="ShopButton2" parent="PanelContainer/MarginContainer/VBoxContainer/BuyItems/HBoxContainer2" unique_id=1057820352 instance=ExtResource("2_bb5rw")]
+layout_mode = 2
+text = "Sell"

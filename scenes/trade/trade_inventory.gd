@@ -7,10 +7,10 @@ const NOT_AVAILABLE: int = -999
 ## does not possess may not be present in the keys of this dictionary.
 @export var inventory: Dictionary[Enums.TradeItem, int] = {}
 ## A dictionary of item type to sell value at this vendor. Items the
-## the vendor does not sell will appear as price -999
+## the vendor does not sell will appear as price [param TradeInventory.NOT_AVAILABLE]
 @export var willing_to_sell: Dictionary[Enums.TradeItem, int] = {}
 ## A dictionary of item type to the price this vendor will buy an item.
-## Items the vendor will not buy will appear as price -999
+## Items the vendor will not buy will appear as price [param TradeInventory.NOT_AVAILABLE]
 @export var willing_to_buy: Dictionary[Enums.TradeItem, int] = {}
 
 var money: int

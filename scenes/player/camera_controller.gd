@@ -1,4 +1,4 @@
-extends Node
+class_name CameraController extends Node
 
 @export var character: Node3D
 @export var camera: Camera3D
@@ -13,6 +13,8 @@ extends Node
 
 var max_pitch: float = deg_to_rad(75.0)
 var min_pitch: float = deg_to_rad(-10.0)
+
+var is_camera_locked: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,7 +31,7 @@ func _process(_delta):
 	
 
 func _on_input_component_mouse_moved(scaled_relative_movement: Vector2) -> void:
-	if camera:
+	if camera and not is_camera_locked:
 		var camera_yaw = scaled_relative_movement.x * camera_sensitivity
 		handle_yaw(camera_yaw)
 		var current_pitch = calculate_current_pitch()

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://brqfslk3rb0lk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fih8t"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="ShopButton" type="Button" unique_id=1700510820]
+custom_minimum_size = Vector2(40, 25)
+theme_override_styles/normal = SubResource("StyleBoxFlat_fih8t")
+text = "Buy"
