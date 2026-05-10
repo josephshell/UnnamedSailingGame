@@ -1,0 +1,133 @@
+[gd_scene format=3 uid="uid://dt6hr3ksh5xwd"]
+
+[ext_resource type="Script" uid="uid://dubgq6gn5irln" path="res://scenes/main.gd" id="1_fp6jq"]
+[ext_resource type="Script" uid="uid://dffadmx7nqmsr" path="res://scripts/input_component.gd" id="2_jlsqs"]
+[ext_resource type="Script" uid="uid://dbhhm8bhtqptl" path="res://scenes/trade/trade_inventory.gd" id="3_rcedf"]
+[ext_resource type="Script" uid="uid://qansd3eut74p" path="res://scenes/player/camera_controller.gd" id="4_bl3fu"]
+[ext_resource type="PackedScene" uid="uid://c4xlp33se5b2j" path="res://scenes/trade/trading_post.tscn" id="4_qawyw"]
+[ext_resource type="Script" uid="uid://c1xlsw4e8yell" path="res://scenes/player/movement_component.gd" id="4_rcedf"]
+[ext_resource type="PackedScene" uid="uid://b665daxdyt8i5" path="res://scenes/trade/shop_ui.tscn" id="6_2rkij"]
+[ext_resource type="PackedScene" uid="uid://b1qi60wyfkxxj" path="res://scenes/boat/boat.tscn" id="8_rcedf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_etftv"]
+transparency = 1
+albedo_color = Color(0, 0.16078432, 0.83137256, 0.5686275)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3203q"]
+material = SubResource("StandardMaterial3D_etftv")
+size = Vector2(300, 300)
+
+[sub_resource type="PrismMesh" id="PrismMesh_w45kc"]
+size = Vector3(39.25, 100, 30.105)
+
+[node name="Main" type="Node3D" unique_id=51395407]
+script = ExtResource("1_fp6jq")
+
+[node name="InputComponent" type="Node" parent="." unique_id=197509964]
+script = ExtResource("2_jlsqs")
+
+[node name="MovementComponent" type="Node" parent="." unique_id=2013110661]
+unique_name_in_owner = true
+script = ExtResource("4_rcedf")
+movement_force = 100.0
+turning_torque = 100.0
+max_speed = 15.0
+metadata/_custom_type_script = "uid://c1xlsw4e8yell"
+
+[node name="CameraController" type="Node" parent="." unique_id=106433622 node_paths=PackedStringArray("character", "camera")]
+script = ExtResource("4_bl3fu")
+character = NodePath("../Boat")
+camera = NodePath("../Camera3D")
+base_follow_distance = 30.0
+camera_aim_height = 10.0
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=2011833120]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3266363, 5.895201, 5.9076767)
+current = true
+
+[node name="Water" type="MeshInstance3D" parent="." unique_id=194562612]
+mesh = SubResource("PlaneMesh_3203q")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=209994622]
+transform = Transform3D(0.9771904, -0.1649665, 0.13373508, 0, 0.6297408, 0.77680534, -0.21236528, -0.7590867, 0.61537665, 0, 0, 0)
+
+[node name="Environment" type="Node3D" parent="." unique_id=1378796581]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment" unique_id=1168632938]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.982964, 40.252243, -84.32513)
+mesh = SubResource("PrismMesh_w45kc")
+
+[node name="PlayerTradeInventory" type="Node" parent="." unique_id=1408920106]
+unique_name_in_owner = true
+script = ExtResource("3_rcedf")
+
+[node name="ShopNameUI" type="CanvasLayer" parent="." unique_id=445033844]
+unique_name_in_owner = true
+
+[node name="ShopNameContainer" type="MarginContainer" parent="ShopNameUI" unique_id=1649858378]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -93.0
+offset_top = -40.0
+offset_right = 93.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 33
+
+[node name="ShopNameLabel" type="Label" parent="ShopNameUI/ShopNameContainer" unique_id=273936886]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Welcome to SHOPNAME"
+
+[node name="ShopUI" parent="." unique_id=2123106438 instance=ExtResource("6_2rkij")]
+unique_name_in_owner = true
+
+[node name="Boat" parent="." unique_id=652707839 instance=ExtResource("8_rcedf")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 98.13656, -0.021572113, 12.37447)
+
+[node name="TradingPostContainer" type="Node3D" parent="." unique_id=1411946182]
+unique_name_in_owner = true
+
+[node name="CoffeeTradingPost" parent="TradingPostContainer" unique_id=221879639 node_paths=PackedStringArray("trade_inventory") instance=ExtResource("4_qawyw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 123.86626, -7.6293945e-06, -87.79325)
+trade_inventory = NodePath("TradeInventory")
+
+[node name="TradeInventory" type="Node" parent="TradingPostContainer/CoffeeTradingPost" unique_id=428237467]
+script = ExtResource("3_rcedf")
+inventory = Dictionary[int, int]({
+1: 10
+})
+willing_to_sell = Dictionary[int, int]({
+1: 10
+})
+willing_to_buy = Dictionary[int, int]({
+2: 20
+})
+metadata/_custom_type_script = "uid://dbhhm8bhtqptl"
+
+[node name="RumTradingPost" parent="TradingPostContainer" unique_id=776951108 node_paths=PackedStringArray("trade_inventory") instance=ExtResource("4_qawyw")]
+transform = Transform3D(-0.43006992, 0, -0.90279555, 0, 1, 0, 0.90279555, 0, -0.43006992, 92.73891, -7.6293945e-06, 69.89037)
+trading_post_name = "Rummery"
+trade_inventory = NodePath("TradeInventory")
+
+[node name="TradeInventory" type="Node" parent="TradingPostContainer/RumTradingPost" unique_id=557591891]
+script = ExtResource("3_rcedf")
+inventory = Dictionary[int, int]({
+2: 10
+})
+willing_to_sell = Dictionary[int, int]({
+2: 10
+})
+willing_to_buy = Dictionary[int, int]({
+1: 20
+})
+metadata/_custom_type_script = "uid://dbhhm8bhtqptl"
+
+[connection signal="interact_pressed" from="InputComponent" to="." method="_on_input_component_interact_pressed"]
+[connection signal="mouse_moved" from="InputComponent" to="CameraController" method="_on_input_component_mouse_moved"]
+[connection signal="movement_pressed" from="InputComponent" to="MovementComponent" method="_on_input_component_movement_pressed"]

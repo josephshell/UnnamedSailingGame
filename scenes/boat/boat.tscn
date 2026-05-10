@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://b1qi60wyfkxxj"]
+
+[ext_resource type="Script" uid="uid://bf068gmbjqsqk" path="res://buoyancy/boat/boat.gd" id="1_51e06"]
+[ext_resource type="Script" uid="uid://duo4rg3igxprv" path="res://buoyancy/float/float_component.gd" id="2_8s4rw"]
+[ext_resource type="Script" uid="uid://ej7dgddrftdw" path="res://buoyancy/float/buoy.gd" id="3_fjqcs"]
+[ext_resource type="PackedScene" uid="uid://y06tx66edpwx" path="res://Assets/boat2/ship-large.fbx" id="4_1mvpx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7boo4"]
+size = Vector3(8.72583, 1, 15.212761)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3g6ue"]
+size = Vector3(7.319824, 1, 5.965637)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mxqbw"]
+size = Vector3(7.2578125, 1, 3.2537231)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ybdmr"]
+size = Vector3(7.2578125, 1, 4.1454163)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j5ur7"]
+size = Vector3(7.2747803, 1, 3.3968277)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mhtev"]
+size = Vector3(2.594635, 1, 2.3781013)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wqivs"]
+radius = 15.0
+
+[node name="Boat" type="RigidBody3D" unique_id=652707839]
+gravity_scale = 0.0
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, -2, 0)
+script = ExtResource("1_51e06")
+metadata/_custom_type_script = "uid://bf068gmbjqsqk"
+
+[node name="FloatComponent" type="Node3D" parent="." unique_id=1317879653 node_paths=PackedStringArray("floatable", "buoys")]
+script = ExtResource("2_8s4rw")
+floatable = NodePath("..")
+buoys = [NodePath("Buoy"), NodePath("Buoy2"), NodePath("Buoy3"), NodePath("Buoy4")]
+metadata/_custom_type_script = "uid://duo4rg3igxprv"
+
+[node name="Buoy" type="Node3D" parent="FloatComponent" unique_id=1292990185]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.155562, 2.3452673, 6.8840938)
+script = ExtResource("3_fjqcs")
+metadata/_custom_type_script = "uid://ej7dgddrftdw"
+
+[node name="Buoy2" type="Node3D" parent="FloatComponent" unique_id=1354272376]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4171658, 2.3452673, 6.789161)
+script = ExtResource("3_fjqcs")
+metadata/_custom_type_script = "uid://ej7dgddrftdw"
+
+[node name="Buoy3" type="Node3D" parent="FloatComponent" unique_id=1215163191]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.128003, 2.3452673, -12.726164)
+script = ExtResource("3_fjqcs")
+metadata/_custom_type_script = "uid://ej7dgddrftdw"
+
+[node name="Buoy4" type="Node3D" parent="FloatComponent" unique_id=2133113339]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3709273, 2.3452673, -12.938318)
+script = ExtResource("3_fjqcs")
+metadata/_custom_type_script = "uid://ej7dgddrftdw"
+
+[node name="FBXModel" parent="." unique_id=1965114658 instance=ExtResource("4_1mvpx")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="CollisionShapeDivider" type="Node" parent="." unique_id=88533179]
+
+[node name="MainDeck" type="CollisionShape3D" parent="." unique_id=1874838035]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.011594772, 3.6998029, -4.0046415)
+shape = SubResource("BoxShape3D_7boo4")
+
+[node name="FrontDeck" type="CollisionShape3D" parent="." unique_id=1768594598]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.031370163, 5.053067, 6.324197)
+shape = SubResource("BoxShape3D_3g6ue")
+
+[node name="FrontStairs" type="CollisionShape3D" parent="." unique_id=85866149]
+transform = Transform3D(1, 0, 0, 0, 0.89258605, 0.45087767, 0, -0.45087767, 0.89258605, -0.025390625, 4.3997083, 3.228063)
+shape = SubResource("BoxShape3D_mxqbw")
+
+[node name="BackStairs" type="CollisionShape3D" parent="." unique_id=447715481]
+transform = Transform3D(1, 0, 0, 0, 0.7334097, -0.67978704, 0, 0.67978704, 0.7334097, -0.09576321, 5.202072, -8.271662)
+shape = SubResource("BoxShape3D_ybdmr")
+
+[node name="BackDeck" type="CollisionShape3D" parent="." unique_id=2076237396]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00884819, 6.413311, -10.96016)
+shape = SubResource("BoxShape3D_j5ur7")
+
+[node name="SteeringDeck" type="CollisionShape3D" parent="." unique_id=208184793]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0003528595, 6.4464436, -8.407122)
+shape = SubResource("BoxShape3D_mhtev")
+
+[node name="SenseArea" type="Area3D" parent="." unique_id=83193780 groups=["player"]]
+unique_name_in_owner = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SenseArea" unique_id=1483282285]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.188936, -1.0708432)
+shape = SubResource("SphereShape3D_wqivs")

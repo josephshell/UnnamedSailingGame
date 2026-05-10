@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://c4xlp33se5b2j"]
+
+[ext_resource type="Script" uid="uid://c1fh31vovoau0" path="res://buoyancy/trade/trading_post.gd" id="1_wg4ra"]
+[ext_resource type="PackedScene" uid="uid://5yxwe2bglav7" path="res://Assets/house_on_a_lake.fbx" id="2_ru3gy"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_w45kc"]
+radius = 20.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tvjid"]
+transparency = 1
+albedo_color = Color(0, 0.68235296, 0.68235296, 0.14509805)
+
+[sub_resource type="SphereMesh" id="SphereMesh_gay3b"]
+material = SubResource("StandardMaterial3D_tvjid")
+radius = 20.0
+height = 40.0
+
+[node name="CoffeeTradingPost" type="Area3D" unique_id=776951108]
+script = ExtResource("1_wg4ra")
+trading_post_name = "Coffee House"
+metadata/_custom_type_script = "uid://c1fh31vovoau0"
+
+[node name="TradingPostModel" parent="." unique_id=491054129 instance=ExtResource("2_ru3gy")]
+transform = Transform3D(3.5715792, 0, -4.3326716, 0, 5.615, 0, 4.3326716, 0, 3.5715792, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1812354718]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.48416138, 0, 3.7068634)
+shape = SubResource("SphereShape3D_w45kc")
+
+[node name="PortVisualizer" type="MeshInstance3D" parent="." unique_id=327860772]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.48416138, 0, 3.7068634)
+mesh = SubResource("SphereMesh_gay3b")
