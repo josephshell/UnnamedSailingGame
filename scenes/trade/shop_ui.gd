@@ -18,7 +18,7 @@ func populate(trading_post: TradingPost):
 		buy_items.remove_child(child)
 		child.queue_free()
 	for item in trade_inventory.inventory:
-		var h_box_container: HBoxContainer = HBoxContainer.new()
+		var h_box_container: HBoxContainer = _new_centered_h_box_container()
 		var quantity_label = Label.new()
 		quantity_label.text = "%dx" % trade_inventory.inventory[item]
 		var name_label = Label.new()
@@ -31,7 +31,7 @@ func populate(trading_post: TradingPost):
 		var price = trade_inventory.willing_to_sell[item]
 		if price == TradeInventory.NOT_AVAILABLE:
 			continue
-		var h_box_container: HBoxContainer = HBoxContainer.new()
+		var h_box_container: HBoxContainer = _new_centered_h_box_container()
 		var item_price_label = Label.new()
 		item_price_label.text = "$%d" % price
 		var name_label = Label.new()
@@ -45,7 +45,7 @@ func populate(trading_post: TradingPost):
 		var price = trade_inventory.willing_to_buy[item]
 		if price == TradeInventory.NOT_AVAILABLE:
 			continue
-		var h_box_container: HBoxContainer = HBoxContainer.new()
+		var h_box_container: HBoxContainer = _new_centered_h_box_container()
 		var item_price_label = Label.new()
 		item_price_label.text = "$%d" % price
 		var name_label = Label.new()
@@ -53,3 +53,8 @@ func populate(trading_post: TradingPost):
 		h_box_container.add_child(item_price_label)
 		h_box_container.add_child(name_label)
 		buy_items.add_child(h_box_container)
+
+func _new_centered_h_box_container() -> HBoxContainer:
+	var container = HBoxContainer.new()
+	container.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	return container

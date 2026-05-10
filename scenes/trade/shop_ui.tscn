@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b665daxdyt8i5"]
 
-[ext_resource type="Script" uid="uid://d0x8exdetqm1e" path="res://buoyancy/trade/shop_ui.gd" id="1_slvno"]
+[ext_resource type="Script" uid="uid://d0x8exdetqm1e" path="res://scenes/trade/shop_ui.gd" id="1_slvno"]
 
 [node name="ShopUI" type="CanvasLayer" unique_id=2123106438]
 script = ExtResource("1_slvno")
