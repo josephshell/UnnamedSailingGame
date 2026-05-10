@@ -4,6 +4,8 @@ extends Node3D
 @onready var shop_name_ui = %ShopNameUI
 @onready var shop_name_label = %ShopNameLabel
 
+@onready var player_hud: PlayerHUD = %PlayerHud
+
 @onready var trading_post_container: Node3D = %TradingPostContainer
 
 @onready var player_trade_inventory: TradeInventory = %PlayerTradeInventory
@@ -19,6 +21,7 @@ func _ready() -> void:
 	shop_name_ui.hide()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	movement_component.boat = boat
+	player_hud.set_player_inventory(player_trade_inventory)
 	
 	for child in trading_post_container.get_children():
 		if child is TradingPost:
@@ -69,11 +72,13 @@ func purchase(trade_item: Enums.TradeItem, at_shop: TradingPost):
 		player_trade_inventory.money = max(player_trade_inventory.money - cost, 0)
 		var current_inventory = player_trade_inventory.inventory.get_or_add(trade_item, 0)
 		player_trade_inventory.inventory[trade_item] += 1
+		player_hud.set_player_inventory(player_trade_inventory)
 	else:
 		printerr(
 			"Failed to purchase %s at shop %s. Price was not available." % \
 				[Enums.TradeItem.find_key(trade_item), at_shop.trading_post_name]
 		)
+
 #region InputComponent
 func _on_input_component_interact_pressed():
 	if near_shop != null:

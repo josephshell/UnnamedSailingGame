@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://c1xlsw4e8yell" path="res://scenes/player/movement_component.gd" id="4_rcedf"]
 [ext_resource type="PackedScene" uid="uid://b665daxdyt8i5" path="res://scenes/trade/shop_ui.tscn" id="6_2rkij"]
 [ext_resource type="PackedScene" uid="uid://b1qi60wyfkxxj" path="res://scenes/boat/boat.tscn" id="8_rcedf"]
+[ext_resource type="PackedScene" uid="uid://ctlsw56iex0xt" path="res://scenes/player/player_hud.tscn" id="9_q8u5g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_etftv"]
 transparency = 1
@@ -127,6 +128,9 @@ willing_to_buy = Dictionary[int, int]({
 1: 20
 })
 metadata/_custom_type_script = "uid://dbhhm8bhtqptl"
+
+[node name="PlayerHud" parent="." unique_id=1893105796 instance=ExtResource("9_q8u5g")]
+unique_name_in_owner = true
 
 [connection signal="interact_pressed" from="InputComponent" to="." method="_on_input_component_interact_pressed"]
 [connection signal="mouse_moved" from="InputComponent" to="CameraController" method="_on_input_component_mouse_moved"]

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ctlsw56iex0xt"]
 
-[ext_resource type="Script" uid="uid://ckdrt75wnj8n1" path="res://buoyancy/player/player_hud.gd" id="1_65gfh"]
+[ext_resource type="Script" uid="uid://ckdrt75wnj8n1" path="res://scenes/player/player_hud.gd" id="1_65gfh"]
 
 [node name="PlayerHud" type="CanvasLayer" unique_id=1893105796]
 script = ExtResource("1_65gfh")
@@ -22,10 +22,12 @@ layout_mode = 2
 text = "Money:"
 
 [node name="Money" type="Label" parent="VBoxContainer/MoneyContainer" unique_id=253122787]
+unique_name_in_owner = true
 layout_mode = 2
 text = "$10"
 
 [node name="InventoryContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=1230124988]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="InventoryItemContainer" type="HBoxContainer" parent="VBoxContainer/InventoryContainer" unique_id=1240809287]
