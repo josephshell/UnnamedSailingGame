@@ -30,9 +30,7 @@ script = ExtResource("2_jlsqs")
 [node name="MovementComponent" type="Node" parent="." unique_id=2013110661]
 unique_name_in_owner = true
 script = ExtResource("4_rcedf")
-movement_force = 100.0
 turning_torque = 100.0
-max_speed = 15.0
 metadata/_custom_type_script = "uid://c1xlsw4e8yell"
 
 [node name="CameraController" type="Node" parent="." unique_id=1466040527 node_paths=PackedStringArray("character", "camera")]
@@ -134,7 +132,9 @@ metadata/_custom_type_script = "uid://dbhhm8bhtqptl"
 [node name="PlayerHud" parent="." unique_id=1893105796 instance=ExtResource("9_q8u5g")]
 unique_name_in_owner = true
 
+[connection signal="backwards_pressed" from="InputComponent" to="." method="_on_input_component_backwards_pressed"]
 [connection signal="exit_pressed" from="InputComponent" to="." method="_on_input_component_exit_pressed"]
+[connection signal="forwards_pressed" from="InputComponent" to="." method="_on_input_component_forwards_pressed"]
 [connection signal="interact_pressed" from="InputComponent" to="." method="_on_input_component_interact_pressed"]
 [connection signal="mouse_moved" from="InputComponent" to="." method="_on_input_component_mouse_moved"]
 [connection signal="movement_pressed" from="InputComponent" to="." method="_on_input_component_movement_pressed"]

@@ -3,11 +3,15 @@ class_name PlayerHUD extends CanvasLayer
 @onready var money: Label = %Money
 
 @onready var inventory_container: VBoxContainer = %InventoryContainer
+@onready var speed_bar = %SpeedBar
 
 func set_player_inventory(player_inventory: TradeInventory):
 	clear_hud()
 	set_money(player_inventory.money)
 	set_inventory(player_inventory.inventory)
+
+func set_speed(speed: int):
+	speed_bar.value = speed
 
 func clear_hud():
 	money.text = "$0"

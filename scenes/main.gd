@@ -23,6 +23,7 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	movement_component.boat = boat
 	player_hud.set_player_inventory(player_trade_inventory)
+	player_hud.set_speed(movement_component.get_speed_mode())
 	
 	for child in trading_post_container.get_children():
 		if child is TradingPost:
@@ -167,12 +168,20 @@ func _on_shop_ui_sell_button_pressed(trade_item):
 #region InputComponent signals
 
 func _on_input_component_movement_pressed(direction: Vector2) -> void:
-	movement_component.on_movement_pressed(direction)
+	movement_component.on_turn_input(direction.x)
 
 func _on_input_component_mouse_moved(scaled_relative_movement: Vector2) -> void:
 	camera_controller.on_mouse_moved(scaled_relative_movement)
 
 func _on_input_component_exit_pressed():
 	get_tree().quit()
+
+func _on_input_component_forwards_pressed():
+	movement_component.increase_speed()
+	player_hud.set_speed(movement_component.get_speed_mode())
+
+func _on_input_component_backwards_pressed():
+	movement_component.decrease_speed()
+	player_hud.set_speed(movement_component.get_speed_mode())
 
 #endregion

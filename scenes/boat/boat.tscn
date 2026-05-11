@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://b1qi60wyfkxxj"]
 
-[ext_resource type="Script" uid="uid://bf068gmbjqsqk" path="res://buoyancy/boat/boat.gd" id="1_51e06"]
-[ext_resource type="Script" uid="uid://duo4rg3igxprv" path="res://buoyancy/float/float_component.gd" id="2_8s4rw"]
-[ext_resource type="Script" uid="uid://ej7dgddrftdw" path="res://buoyancy/float/buoy.gd" id="3_fjqcs"]
-[ext_resource type="PackedScene" uid="uid://y06tx66edpwx" path="res://Assets/boat2/ship-large.fbx" id="4_1mvpx"]
+[ext_resource type="Script" uid="uid://bf068gmbjqsqk" path="res://scenes/boat/boat.gd" id="1_51e06"]
+[ext_resource type="Script" uid="uid://duo4rg3igxprv" path="res://scenes/float/float_component.gd" id="2_8s4rw"]
+[ext_resource type="Script" uid="uid://ej7dgddrftdw" path="res://scenes/float/buoy.gd" id="3_fjqcs"]
+[ext_resource type="PackedScene" uid="uid://y06tx66edpwx" path="res://Assets/boat/ship-large.fbx" id="4_1mvpx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7boo4"]
 size = Vector3(8.72583, 1, 15.212761)
