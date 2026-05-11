@@ -6,7 +6,7 @@ class_name MovementComponent extends Node
 
 var boat: Boat
 
-func _on_input_component_movement_pressed(direction: Vector2):
+func on_movement_pressed(direction: Vector2):
 	if not boat:
 		push_error("Not boat?")
 		return

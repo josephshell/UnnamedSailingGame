@@ -30,7 +30,7 @@ func _process(_delta):
 	camera.look_at(character.global_position + camera_aim_modifier)
 	
 
-func _on_input_component_mouse_moved(scaled_relative_movement: Vector2) -> void:
+func on_mouse_moved(scaled_relative_movement: Vector2) -> void:
 	if camera and not is_camera_locked:
 		var camera_yaw = scaled_relative_movement.x * camera_sensitivity
 		handle_yaw(camera_yaw)

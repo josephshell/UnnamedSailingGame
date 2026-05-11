@@ -163,3 +163,13 @@ func _on_shop_ui_sell_button_pressed(trade_item):
 		push_error("Cannot sell %s, no valid shop nearby" % Enums.TradeItem.find_key(trade_item))
 
 #endregion
+
+#region InputComponent signals
+
+func _on_input_component_movement_pressed(direction: Vector2) -> void:
+	movement_component.on_movement_pressed(direction)
+
+func _on_input_component_mouse_moved(scaled_relative_movement: Vector2) -> void:
+	camera_controller.on_mouse_moved(scaled_relative_movement)
+
+#endregion

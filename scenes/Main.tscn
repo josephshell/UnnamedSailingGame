@@ -135,7 +135,7 @@ metadata/_custom_type_script = "uid://dbhhm8bhtqptl"
 unique_name_in_owner = true
 
 [connection signal="interact_pressed" from="InputComponent" to="." method="_on_input_component_interact_pressed"]
-[connection signal="mouse_moved" from="InputComponent" to="CameraController" method="_on_input_component_mouse_moved"]
-[connection signal="movement_pressed" from="InputComponent" to="MovementComponent" method="_on_input_component_movement_pressed"]
+[connection signal="mouse_moved" from="InputComponent" to="." method="_on_input_component_mouse_moved"]
+[connection signal="movement_pressed" from="InputComponent" to="." method="_on_input_component_movement_pressed"]
 [connection signal="buy_button_pressed" from="ShopUI" to="." method="_on_shop_ui_buy_button_pressed"]
 [connection signal="sell_button_pressed" from="ShopUI" to="." method="_on_shop_ui_sell_button_pressed"]
