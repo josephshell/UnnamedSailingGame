@@ -62,6 +62,10 @@ func confine_mouse():
 	camera_controller.is_camera_locked = true
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 
+func release_mouse():
+	camera_controller.is_camera_locked = true
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
 func get_first_sellable_item(trading_post: TradingPost) -> Enums.TradeItem:
 	for item in trading_post.trade_inventory.inventory:
 		if trading_post.trade_inventory.inventory[item] > 0:
@@ -183,5 +187,11 @@ func _on_input_component_forwards_pressed():
 func _on_input_component_backwards_pressed():
 	movement_component.decrease_speed()
 	player_hud.set_speed(movement_component.get_speed_mode())
+
+func _on_input_component_toggle_inventory_pressed():
+	if Input.mouse_mode != Input.MOUSE_MODE_VISIBLE:
+		release_mouse()
+	else:
+		capture_mouse()
 
 #endregion
