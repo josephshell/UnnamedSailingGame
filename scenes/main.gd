@@ -172,4 +172,7 @@ func _on_input_component_movement_pressed(direction: Vector2) -> void:
 func _on_input_component_mouse_moved(scaled_relative_movement: Vector2) -> void:
 	camera_controller.on_mouse_moved(scaled_relative_movement)
 
+func _on_input_component_exit_pressed():
+	get_tree().quit()
+
 #endregion

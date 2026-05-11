@@ -134,6 +134,7 @@ metadata/_custom_type_script = "uid://dbhhm8bhtqptl"
 [node name="PlayerHud" parent="." unique_id=1893105796 instance=ExtResource("9_q8u5g")]
 unique_name_in_owner = true
 
+[connection signal="exit_pressed" from="InputComponent" to="." method="_on_input_component_exit_pressed"]
 [connection signal="interact_pressed" from="InputComponent" to="." method="_on_input_component_interact_pressed"]
 [connection signal="mouse_moved" from="InputComponent" to="." method="_on_input_component_mouse_moved"]
 [connection signal="movement_pressed" from="InputComponent" to="." method="_on_input_component_movement_pressed"]
