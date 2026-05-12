@@ -113,6 +113,7 @@ func buy(trade_item: Enums.TradeItem, at_shop: TradingPost):
 	player_trade_inventory.money = max(player_trade_inventory.money - buy_price, 0)
 	
 	player_hud.set_player_inventory(player_trade_inventory)
+	shop_ui.populate(at_shop)
 
 func sell(trade_item: Enums.TradeItem, at_shop: TradingPost):
 	var abort_trade: bool = false
@@ -151,6 +152,7 @@ func sell(trade_item: Enums.TradeItem, at_shop: TradingPost):
 	at_shop.trade_inventory.money = max(at_shop.trade_inventory.money - sale_price, 0)
 	
 	player_hud.set_player_inventory(player_trade_inventory)
+	shop_ui.populate(at_shop)
 
 
 #region shopUI signals

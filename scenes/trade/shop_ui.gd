@@ -7,6 +7,7 @@ signal sell_button_pressed(trade_item: Enums.TradeItem)
 @onready var sale_items: VBoxContainer = %SaleItems
 @onready var buy_items: VBoxContainer = %BuyItems
 @onready var shop_name_label: Label = %ShopName
+@onready var money: Label = %Money
 
 const SHOP_BUTTON = preload("uid://brqfslk3rb0lk")
 
@@ -14,6 +15,7 @@ const SHOP_BUTTON = preload("uid://brqfslk3rb0lk")
 func populate(trading_post: TradingPost):
 	var trade_inventory = trading_post.trade_inventory
 	shop_name_label.text = "WELCOME TO %s" % trading_post.trading_post_name
+	money.text = "$%d" % trading_post.trade_inventory.money
 	for child in inventory_items.get_children():
 		inventory_items.remove_child(child)
 		child.queue_free()
