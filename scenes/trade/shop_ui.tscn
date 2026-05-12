@@ -111,3 +111,8 @@ text = "Item 2"
 [node name="ShopButton2" parent="PanelContainer/MarginContainer/VBoxContainer/BuyItems/HBoxContainer2" unique_id=1057820352 instance=ExtResource("2_bb5rw")]
 layout_mode = 2
 text = "Sell"
+
+[node name="RumorsButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=695830148]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Get Rumors"

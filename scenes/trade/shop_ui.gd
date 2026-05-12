@@ -2,20 +2,22 @@ class_name ShopUI extends CanvasLayer
 
 signal buy_button_pressed(trade_item: Enums.TradeItem)
 signal sell_button_pressed(trade_item: Enums.TradeItem)
+signal rumors_button_pressed(trading_post: TradingPost)
 
 @onready var inventory_items: VBoxContainer = %InventoryItems
 @onready var sale_items: VBoxContainer = %SaleItems
 @onready var buy_items: VBoxContainer = %BuyItems
 @onready var shop_name_label: Label = %ShopName
 @onready var money: Label = %Money
+@onready var rumors_button: Button = %RumorsButton
 
 const SHOP_BUTTON = preload("uid://brqfslk3rb0lk")
-
 
 func populate(trading_post: TradingPost):
 	var trade_inventory = trading_post.trade_inventory
 	shop_name_label.text = "WELCOME TO %s" % trading_post.trading_post_name
 	money.text = "$%d" % trading_post.trade_inventory.money
+	rumors_button.pressed.connect(func(): rumors_button_pressed.emit(trading_post))
 	for child in inventory_items.get_children():
 		inventory_items.remove_child(child)
 		child.queue_free()

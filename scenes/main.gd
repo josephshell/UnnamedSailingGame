@@ -169,6 +169,8 @@ func _on_shop_ui_sell_button_pressed(trade_item):
 	else:
 		push_error("Cannot sell %s, no valid shop nearby" % Enums.TradeItem.find_key(trade_item))
 
+func _on_shop_ui_rumors_button_pressed(trading_post: TradingPost) -> void:
+	print("No rumors available at trading post ", trading_post.trading_post_name)
 #endregion
 
 #region InputComponent signals
