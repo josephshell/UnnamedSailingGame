@@ -12,6 +12,7 @@ signal exit_menu_button_pressed
 @onready var money: Label = %Money
 
 @onready var rumors_button: Button = %RumorsButton
+@onready var exit_menu_button = %ExitMenuButton
 
 @onready var primary_shop_window = %PrimaryShopWindow
 @onready var tutorial_popup = %TutorialPopup
@@ -36,6 +37,7 @@ func _enable_rumor_container(rumor: TradingPostContainer.Rumor):
 
 func toggle_primary_shop_window(make_visible: bool):
 	primary_shop_window.visible = make_visible
+	exit_menu_button.visible = make_visible
 
 func toggle_tutorial_popup(make_visible: bool):
 	tutorial_popup.visible = make_visible
