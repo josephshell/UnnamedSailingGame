@@ -18,7 +18,7 @@ var near_shop: TradingPost
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	shop_ui.hide()
+	disable_shop_menu()
 	shop_name_ui.hide()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	movement_component.boat = boat
@@ -41,19 +41,13 @@ func _on_trading_post_exited(trading_post: TradingPost, area: Area3D):
 
 func _on_boat_player_arrived_at_post(trading_post: TradingPost):
 	shop_name_label.text = "WELCOME TO %s" % trading_post.trading_post_name
-	shop_ui.populate(trading_post)
-	shop_ui.set_rumor(null)
-	shop_ui.show()
+	shop_ui.toggle_tutorial_popup(true)
 	shop_name_ui.show()
 	near_shop = trading_post
-	confine_mouse()
 
 func _on_boat_player_left_post():
-	shop_ui.hide()
-	shop_name_ui.hide()
-	shop_name_label.text = "ERROR"
+	disable_shop_menu()
 	near_shop = null
-	capture_mouse()
 
 #endregion
 
@@ -180,6 +174,11 @@ func _on_shop_ui_rumors_button_pressed(trading_post: TradingPost) -> void:
 		var rumor = all_rumors.pick_random()
 		print("Rumor: %s" % rumor.description)
 		shop_ui.set_rumor(rumor)
+
+func _on_shop_ui_exit_menu_button_pressed():
+	disable_shop_menu()
+	_on_boat_player_arrived_at_post(near_shop)
+
 #endregion
 
 #region InputComponent signals
@@ -207,4 +206,22 @@ func _on_input_component_toggle_inventory_pressed():
 	else:
 		capture_mouse()
 
+func _on_input_component_interact_pressed():
+	if near_shop:
+		initiate_shop_menu()
+
 #endregion
+
+func initiate_shop_menu():
+	confine_mouse()
+	shop_ui.populate(near_shop)
+	shop_ui.set_rumor(null)
+	shop_ui.toggle_primary_shop_window(true)
+	shop_ui.toggle_tutorial_popup(false)
+
+func disable_shop_menu():
+	shop_ui.toggle_primary_shop_window(false)
+	shop_ui.toggle_tutorial_popup(false)
+	shop_name_ui.hide()
+	shop_name_label.text = "ERROR"
+	capture_mouse()
