@@ -17,10 +17,13 @@ albedo_color = Color(0, 0.16078432, 0.83137256, 0.5686275)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_3203q"]
 material = SubResource("StandardMaterial3D_etftv")
-size = Vector2(300, 300)
+size = Vector2(1000, 1000)
 
 [sub_resource type="PrismMesh" id="PrismMesh_w45kc"]
 size = Vector3(39.25, 100, 30.105)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_lhr70"]
+data = PackedVector3Array(0, 50, 15.0525, 19.625, -50, 15.0525, -19.625, -50, 15.0525, 0, 50, -15.0525, -19.625, -50, -15.0525, 19.625, -50, -15.0525, 0, 50, 15.0525, 0, 50, -15.0525, 19.625, -50, 15.0525, 0, 50, -15.0525, 19.625, -50, -15.0525, 19.625, -50, 15.0525, 0, 50, -15.0525, 0, 50, 15.0525, -19.625, -50, -15.0525, 0, 50, 15.0525, -19.625, -50, 15.0525, -19.625, -50, -15.0525, -19.625, -50, 15.0525, 19.625, -50, 15.0525, -19.625, -50, -15.0525, 19.625, -50, 15.0525, 19.625, -50, -15.0525, -19.625, -50, -15.0525)
 
 [node name="Main" type="Node3D" unique_id=51395407]
 script = ExtResource("1_fp6jq")
@@ -55,9 +58,41 @@ transform = Transform3D(0.9771904, -0.1649665, 0.13373508, 0, 0.6297408, 0.77680
 
 [node name="Environment" type="Node3D" parent="." unique_id=1378796581]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment" unique_id=1168632938]
+[node name="Mountain" type="MeshInstance3D" parent="Environment" unique_id=1168632938]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.982964, 40.252243, -84.32513)
 mesh = SubResource("PrismMesh_w45kc")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/Mountain" unique_id=656777698]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Mountain/StaticBody3D" unique_id=7558707]
+shape = SubResource("ConcavePolygonShape3D_lhr70")
+
+[node name="Mountain2" type="MeshInstance3D" parent="Environment" unique_id=1515276509]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.249985, 40.252228, -43.95278)
+mesh = SubResource("PrismMesh_w45kc")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/Mountain2" unique_id=1314547613]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Mountain2/StaticBody3D" unique_id=1338017743]
+shape = SubResource("ConcavePolygonShape3D_lhr70")
+
+[node name="Mountain3" type="MeshInstance3D" parent="Environment" unique_id=808858141]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -160.37021, 40.252243, -35.76037)
+mesh = SubResource("PrismMesh_w45kc")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/Mountain3" unique_id=989138802]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Mountain3/StaticBody3D" unique_id=1656009655]
+shape = SubResource("ConcavePolygonShape3D_lhr70")
+
+[node name="Mountain4" type="MeshInstance3D" parent="Environment" unique_id=675797256]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.309853, 40.252243, 43.26127)
+mesh = SubResource("PrismMesh_w45kc")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/Mountain4" unique_id=1405389563]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Mountain4/StaticBody3D" unique_id=1665072715]
+shape = SubResource("ConcavePolygonShape3D_lhr70")
 
 [node name="PlayerTradeInventory" type="Node" parent="." unique_id=1408920106]
 unique_name_in_owner = true
@@ -98,7 +133,7 @@ script = ExtResource("8_lhr70")
 metadata/_custom_type_script = "uid://0130vi54b4dc"
 
 [node name="CaféLoca" parent="TradingPostContainer" unique_id=221879639 node_paths=PackedStringArray("trade_inventory") instance=ExtResource("4_qawyw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 123.86626, -7.6293945e-06, -87.79325)
+transform = Transform3D(0.3011386, 0, 0.9535804, 0, 1, 0, -0.9535804, 0, 0.3011386, -188.62154, -7.6293945e-06, -178.10767)
 trading_post_name = "CaféLoca"
 trade_inventory = NodePath("TradeInventory")
 
