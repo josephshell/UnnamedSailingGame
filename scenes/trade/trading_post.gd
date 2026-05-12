@@ -6,6 +6,8 @@ signal trading_post_exited(trading_post: TradingPost, area: Area3D)
 @export var trading_post_name: String = "UNNAMED"
 @export var trade_inventory: TradeInventory
 
+@onready var trading_post_billboard: Label3D = %TradingPostBillboard
+
 func _ready():
 	area_entered.connect(func(area): 
 		trading_post_entered.emit(self, area)
@@ -13,6 +15,7 @@ func _ready():
 	area_exited.connect(func(area):
 		trading_post_exited.emit(self, area)
 	)
+	trading_post_billboard.text = trading_post_name
 
 func is_item_wanted(trade_item: Enums.TradeItem) -> bool:
 	return _has_buy_price(trade_item)
