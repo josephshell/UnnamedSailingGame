@@ -18,7 +18,7 @@ albedo_color = Color(0, 0.16078432, 0.83137256, 0.5686275)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_3203q"]
 material = SubResource("StandardMaterial3D_etftv")
-size = Vector2(1000, 1000)
+size = Vector2(5000, 5000)
 
 [sub_resource type="PrismMesh" id="PrismMesh_w45kc"]
 size = Vector3(39.25, 100, 30.105)
