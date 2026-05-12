@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://0130vi54b4dc" path="res://scenes/trade/trading_post_container.gd" id="8_lhr70"]
 [ext_resource type="PackedScene" uid="uid://b1qi60wyfkxxj" path="res://scenes/boat/boat.tscn" id="8_rcedf"]
 [ext_resource type="PackedScene" uid="uid://ctlsw56iex0xt" path="res://scenes/player/player_hud.tscn" id="9_q8u5g"]
+[ext_resource type="Texture2D" uid="uid://cufbqx1wb1ke7" path="res://Assets/skybox/AllSkyFree_Sky_EpicBlueSunset_Equirect.png" id="11_wp0k4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_etftv"]
 transparency = 1
@@ -24,6 +25,18 @@ size = Vector3(39.25, 100, 30.105)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_lhr70"]
 data = PackedVector3Array(0, 50, 15.0525, 19.625, -50, 15.0525, -19.625, -50, 15.0525, 0, 50, -15.0525, -19.625, -50, -15.0525, 19.625, -50, -15.0525, 0, 50, 15.0525, 0, 50, -15.0525, 19.625, -50, 15.0525, 0, 50, -15.0525, 19.625, -50, -15.0525, 19.625, -50, 15.0525, 0, 50, -15.0525, 0, 50, 15.0525, -19.625, -50, -15.0525, 0, 50, 15.0525, -19.625, -50, 15.0525, -19.625, -50, -15.0525, -19.625, -50, 15.0525, 19.625, -50, 15.0525, -19.625, -50, -15.0525, 19.625, -50, 15.0525, 19.625, -50, -15.0525, -19.625, -50, -15.0525)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_bjd11"]
+panorama = ExtResource("11_wp0k4")
+
+[sub_resource type="Sky" id="Sky_qmy6f"]
+sky_material = SubResource("PanoramaSkyMaterial_bjd11")
+
+[sub_resource type="Environment" id="Environment_mwfav"]
+background_mode = 2
+sky = SubResource("Sky_qmy6f")
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_3p2gp"]
 
 [node name="Main" type="Node3D" unique_id=51395407]
 script = ExtResource("1_fp6jq")
@@ -54,7 +67,7 @@ current = true
 mesh = SubResource("PlaneMesh_3203q")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=209994622]
-transform = Transform3D(0.9771904, -0.1649665, 0.13373508, 0, 0.6297408, 0.77680534, -0.21236528, -0.7590867, 0.61537665, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.91591495, 0.40137237, 0, -0.40137237, 0.91591495, 0, 0, 0)
 
 [node name="Environment" type="Node3D" parent="." unique_id=1378796581]
 
@@ -170,6 +183,10 @@ metadata/_custom_type_script = "uid://dbhhm8bhtqptl"
 
 [node name="PlayerHud" parent="." unique_id=1893105796 instance=ExtResource("9_q8u5g")]
 unique_name_in_owner = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=673783855]
+environment = SubResource("Environment_mwfav")
+camera_attributes = SubResource("CameraAttributesPractical_3p2gp")
 
 [connection signal="backwards_pressed" from="InputComponent" to="." method="_on_input_component_backwards_pressed"]
 [connection signal="exit_pressed" from="InputComponent" to="." method="_on_input_component_exit_pressed"]
