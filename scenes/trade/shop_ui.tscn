@@ -7,112 +7,142 @@
 script = ExtResource("1_slvno")
 metadata/_custom_type_script = "uid://d0x8exdetqm1e"
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=2136846249]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1237930847]
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=2143695665]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=2136846249]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer" unique_id=2143695665]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1714501843]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer" unique_id=1714501843]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="ShopName" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=927979666]
+[node name="ShopName" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=927979666]
 unique_name_in_owner = true
 layout_mode = 2
 text = "WELCOME TO SHOPNAME"
 horizontal_alignment = 1
 
-[node name="MoneyHBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1347782968]
+[node name="MoneyHBox" type="HBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1347782968]
 layout_mode = 2
 alignment = 1
 
-[node name="MoneyLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MoneyHBox" unique_id=1343372514]
+[node name="MoneyLabel" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MoneyHBox" unique_id=1343372514]
 layout_mode = 2
 text = "Money:"
 
-[node name="Money" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MoneyHBox" unique_id=1955026459]
+[node name="Money" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MoneyHBox" unique_id=1955026459]
 unique_name_in_owner = true
 layout_mode = 2
 text = "$-999"
 
-[node name="InventoryDivider" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=593158956]
+[node name="InventoryDivider" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=593158956]
 layout_mode = 2
 text = "INVENTORY"
 horizontal_alignment = 1
 
-[node name="InventoryItems" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1447718804]
+[node name="InventoryItems" type="VBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1447718804]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/InventoryItems" unique_id=1588032936]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/InventoryItems" unique_id=1588032936]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="ItemQuantity" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/InventoryItems/HBoxContainer" unique_id=45271345]
+[node name="ItemQuantity" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/InventoryItems/HBoxContainer" unique_id=45271345]
 layout_mode = 2
 text = "8x"
 
-[node name="ItemLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/InventoryItems/HBoxContainer" unique_id=1938677055]
+[node name="ItemLabel" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/InventoryItems/HBoxContainer" unique_id=1938677055]
 layout_mode = 2
 text = "Item 1"
 horizontal_alignment = 1
 
-[node name="ForSaleDivider" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1891231782]
+[node name="ForSaleDivider" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1891231782]
 layout_mode = 2
 text = "FOR SALE"
 horizontal_alignment = 1
 
-[node name="SaleItems" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1595743533]
+[node name="SaleItems" type="VBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1595743533]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/SaleItems" unique_id=595739915]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/SaleItems" unique_id=595739915]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="ItemPrice" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/SaleItems/HBoxContainer" unique_id=1956430649]
+[node name="ItemPrice" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/SaleItems/HBoxContainer" unique_id=1956430649]
 layout_mode = 2
 text = "$10"
 
-[node name="ItemLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/SaleItems/HBoxContainer" unique_id=1692901079]
+[node name="ItemLabel" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/SaleItems/HBoxContainer" unique_id=1692901079]
 layout_mode = 2
 text = "Item 1"
 
-[node name="ShopButton" parent="PanelContainer/MarginContainer/VBoxContainer/SaleItems/HBoxContainer" unique_id=1700510820 instance=ExtResource("2_bb5rw")]
+[node name="ShopButton" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/SaleItems/HBoxContainer" unique_id=1700510820 instance=ExtResource("2_bb5rw")]
 layout_mode = 2
 
-[node name="BuyingDivider" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=117780143]
+[node name="BuyingDivider" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=117780143]
 layout_mode = 2
 text = "BUYING"
 horizontal_alignment = 1
 
-[node name="BuyItems" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1104163154]
+[node name="BuyItems" type="VBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1104163154]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/BuyItems" unique_id=1069634165]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/BuyItems" unique_id=1069634165]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="ItemPrice" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/BuyItems/HBoxContainer2" unique_id=1449509116]
+[node name="ItemPrice" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/BuyItems/HBoxContainer2" unique_id=1449509116]
 layout_mode = 2
 text = "$10"
 
-[node name="ItemLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/BuyItems/HBoxContainer2" unique_id=1835316338]
+[node name="ItemLabel" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/BuyItems/HBoxContainer2" unique_id=1835316338]
 layout_mode = 2
 text = "Item 2"
 
-[node name="ShopButton2" parent="PanelContainer/MarginContainer/VBoxContainer/BuyItems/HBoxContainer2" unique_id=1057820352 instance=ExtResource("2_bb5rw")]
+[node name="ShopButton2" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/BuyItems/HBoxContainer2" unique_id=1057820352 instance=ExtResource("2_bb5rw")]
 layout_mode = 2
 text = "Sell"
 
-[node name="RumorsButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=695830148]
+[node name="RumorsButton" type="Button" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=695830148]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Get Rumors"
+
+[node name="RumorContainer" type="PanelContainer" parent="VBoxContainer" unique_id=1557687606]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/RumorContainer" unique_id=1190097577]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/RumorContainer/MarginContainer" unique_id=1481969682]
+layout_mode = 2
+
+[node name="RumorLabel" type="Label" parent="VBoxContainer/RumorContainer/MarginContainer/VBoxContainer" unique_id=1698448424]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "I'm a rumor! There is plunder abound! Try Port Royale, I hear it has the hairiest rum this side of the Atlantic!"
+autowrap_mode = 2
+
+[node name="DismissRumorButton" type="Button" parent="VBoxContainer/RumorContainer/MarginContainer/VBoxContainer" unique_id=1534088499]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Dismiss"

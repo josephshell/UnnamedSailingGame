@@ -6,7 +6,7 @@ extends Node3D
 
 @onready var player_hud: PlayerHUD = %PlayerHud
 
-@onready var trading_post_container: Node3D = %TradingPostContainer
+@onready var trading_post_container: TradingPostContainer = %TradingPostContainer
 
 @onready var player_trade_inventory: TradeInventory = %PlayerTradeInventory
 
@@ -30,7 +30,7 @@ func _ready() -> void:
 			child.trading_post_entered.connect(_on_trading_post_entered)
 			child.trading_post_exited.connect(_on_trading_post_exited)
 
-
+#region TradingPost Signals
 func _on_trading_post_entered(trading_post: TradingPost, area: Area3D):
 	if area.is_in_group("player"):
 		_on_boat_player_arrived_at_post(trading_post)
@@ -42,6 +42,7 @@ func _on_trading_post_exited(trading_post: TradingPost, area: Area3D):
 func _on_boat_player_arrived_at_post(trading_post: TradingPost):
 	shop_name_label.text = "WELCOME TO %s" % trading_post.trading_post_name
 	shop_ui.populate(trading_post)
+	shop_ui.set_rumor(null)
 	shop_ui.show()
 	shop_name_ui.show()
 	near_shop = trading_post
@@ -53,6 +54,8 @@ func _on_boat_player_left_post():
 	shop_name_label.text = "ERROR"
 	near_shop = null
 	capture_mouse()
+
+#endregion
 
 func capture_mouse():
 	camera_controller.is_camera_locked = false
@@ -170,7 +173,13 @@ func _on_shop_ui_sell_button_pressed(trade_item):
 		push_error("Cannot sell %s, no valid shop nearby" % Enums.TradeItem.find_key(trade_item))
 
 func _on_shop_ui_rumors_button_pressed(trading_post: TradingPost) -> void:
-	print("No rumors available at trading post ", trading_post.trading_post_name)
+	var all_rumors = trading_post_container.get_rumors(trading_post)
+	if all_rumors.is_empty():
+		print("No rumors available at trading post ", trading_post.trading_post_name)
+	else:
+		var rumor = all_rumors.pick_random()
+		print("Rumor: %s" % rumor.description)
+		shop_ui.set_rumor(rumor)
 #endregion
 
 #region InputComponent signals

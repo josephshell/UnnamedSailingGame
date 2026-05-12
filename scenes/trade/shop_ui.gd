@@ -11,12 +11,29 @@ signal rumors_button_pressed(trading_post: TradingPost)
 @onready var money: Label = %Money
 @onready var rumors_button: Button = %RumorsButton
 
+@onready var rumor_container: PanelContainer = %RumorContainer
+@onready var rumor_label: Label = %RumorLabel
+@onready var dismiss_rumor_button: Button = %DismissRumorButton
+
 const SHOP_BUTTON = preload("uid://brqfslk3rb0lk")
+
+func _ready():
+	_dismiss_rumor_container()
+	dismiss_rumor_button.pressed.connect(_dismiss_rumor_container)
+
+func _dismiss_rumor_container():
+	rumor_container.hide()
+	
+func _enable_rumor_container(rumor: TradingPostContainer.Rumor):
+	rumor_label.text = rumor.description
+	rumor_container.show()
 
 func populate(trading_post: TradingPost):
 	var trade_inventory = trading_post.trade_inventory
 	shop_name_label.text = "WELCOME TO %s" % trading_post.trading_post_name
 	money.text = "$%d" % trading_post.trade_inventory.money
+	for connection in rumors_button.pressed.get_connections():
+		rumors_button.pressed.disconnect(connection["callable"])
 	rumors_button.pressed.connect(func(): rumors_button_pressed.emit(trading_post))
 	for child in inventory_items.get_children():
 		inventory_items.remove_child(child)
@@ -75,3 +92,9 @@ func _new_centered_h_box_container() -> HBoxContainer:
 	var container = HBoxContainer.new()
 	container.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	return container
+
+func set_rumor(rumor: TradingPostContainer.Rumor):
+	if rumor:
+		_enable_rumor_container(rumor)
+	else:
+		_dismiss_rumor_container()
