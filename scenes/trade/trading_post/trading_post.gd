@@ -11,6 +11,8 @@ signal trading_post_exited(trading_post: TradingPost, area: Area3D)
 @export var amount_to_import: Dictionary[Enums.TradeItem, int] = {}
 @export var _exports: Array[Enums.TradeItem] = []
 
+var price_provider: PriceProvider
+
 func _ready():
 	area_entered.connect(func(area): 
 		trading_post_entered.emit(self, area)
@@ -35,7 +37,7 @@ func is_exporting(trade_item: Enums.TradeItem) -> bool:
 		and trade_inventory.inventory.get_or_add(trade_item, 0) > 0
 
 func import_price_for(trade_item: Enums.TradeItem) -> int:
-	return 20
+	return price_provider.get_import_price_for(trade_item, self)
 
 func export_price_for(trade_item: Enums.TradeItem) -> int:
-	return 10
+	return price_provider.get_export_price_for(trade_item, self)

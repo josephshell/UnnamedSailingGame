@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b665daxdyt8i5" path="res://scenes/trade/shop_ui.tscn" id="6_2rkij"]
 [ext_resource type="Script" uid="uid://0130vi54b4dc" path="res://scenes/trade/trading_post_container.gd" id="8_lhr70"]
 [ext_resource type="PackedScene" uid="uid://b1qi60wyfkxxj" path="res://scenes/boat/boat.tscn" id="8_rcedf"]
+[ext_resource type="Script" uid="uid://sftnp5i05o1d" path="res://scenes/trade/price_provider.gd" id="9_bjd11"]
 [ext_resource type="PackedScene" uid="uid://ctlsw56iex0xt" path="res://scenes/player/player_hud.tscn" id="9_q8u5g"]
 [ext_resource type="Texture2D" uid="uid://cufbqx1wb1ke7" path="res://Assets/skybox/AllSkyFree_Sky_EpicBlueSunset_Equirect.png" id="11_wp0k4"]
 
@@ -140,10 +141,15 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 98.13656, -0.021572113, 12.37447)
 
-[node name="TradingPostContainer" type="Node3D" parent="." unique_id=389840558]
+[node name="TradingPostContainer" type="Node3D" parent="." unique_id=389840558 node_paths=PackedStringArray("price_provider")]
 unique_name_in_owner = true
 script = ExtResource("8_lhr70")
+price_provider = NodePath("PriceProvider")
 metadata/_custom_type_script = "uid://0130vi54b4dc"
+
+[node name="PriceProvider" type="Node" parent="TradingPostContainer" unique_id=1103409489]
+script = ExtResource("9_bjd11")
+metadata/_custom_type_script = "uid://sftnp5i05o1d"
 
 [node name="CaféLoca" parent="TradingPostContainer" unique_id=221879639 node_paths=PackedStringArray("trade_inventory") instance=ExtResource("4_qawyw")]
 transform = Transform3D(0.3011386, 0, 0.9535804, 0, 1, 0, -0.9535804, 0, 0.3011386, -188.62154, -7.6293945e-06, -178.10767)
@@ -161,7 +167,23 @@ inventory = Dictionary[int, int]({
 })
 metadata/_custom_type_script = "uid://dbhhm8bhtqptl"
 
-[node name="Tortungo" parent="TradingPostContainer" unique_id=776951108 node_paths=PackedStringArray("trade_inventory") instance=ExtResource("4_qawyw")]
+[node name="CaféLoca2" parent="TradingPostContainer" unique_id=776951108 node_paths=PackedStringArray("trade_inventory") instance=ExtResource("4_qawyw")]
+transform = Transform3D(0.3011386, 0, 0.9535804, 0, 1, 0, -0.9535804, 0, 0.3011386, 119.014084, -7.6293945e-06, -54.679855)
+trading_post_name = "CaféLoca"
+trade_inventory = NodePath("TradeInventory")
+amount_to_import = Dictionary[int, int]({
+2: 10
+})
+_exports = Array[int]([1])
+
+[node name="TradeInventory" type="Node" parent="TradingPostContainer/CaféLoca2" unique_id=1910045580]
+script = ExtResource("3_rcedf")
+inventory = Dictionary[int, int]({
+1: 10
+})
+metadata/_custom_type_script = "uid://dbhhm8bhtqptl"
+
+[node name="Tortungo" parent="TradingPostContainer" unique_id=1531211137 node_paths=PackedStringArray("trade_inventory") instance=ExtResource("4_qawyw")]
 transform = Transform3D(-0.43006992, 0, -0.90279555, 0, 1, 0, 0.90279555, 0, -0.43006992, 92.73891, -7.6293945e-06, 69.89037)
 trading_post_name = "Tortungo"
 trade_inventory = NodePath("TradeInventory")

@@ -1,10 +1,13 @@
 class_name TradingPostContainer extends Node3D
 
+@export var price_provider: PriceProvider
+
 var trading_posts: Array[TradingPost] = []
 
 func _ready():
-	for trading_post in find_children("*", "TradingPost"):
+	for trading_post: TradingPost in find_children("*", "TradingPost"):
 		trading_posts.append(trading_post)
+		trading_post.price_provider = price_provider
 
 func get_rumors(trading_post: TradingPost) -> Array[Rumor]:
 	if trading_post.trading_post_name == "Tortungo":
