@@ -68,34 +68,34 @@ func populate(trading_post: TradingPost):
 		h_box_container.add_child(name_label)
 		inventory_items.add_child(h_box_container)
 	
-	for item in trade_inventory.willing_to_sell:
-		var price = trade_inventory.willing_to_sell[item]
-		if price == TradeInventory.NOT_AVAILABLE:
+	for export in trading_post.get_exports():
+		if not trading_post.is_exporting(export):
 			continue
 		var h_box_container: HBoxContainer = _new_centered_h_box_container()
 		var item_price_label = Label.new()
+		var price = trading_post.export_price_for(export)
 		item_price_label.text = "$%d" % price
 		var name_label = Label.new()
-		name_label.text = Enums.TradeItem.find_key(item)
+		name_label.text = Enums.TradeItem.find_key(export)
 		var buy_button: Button = SHOP_BUTTON.instantiate()
-		buy_button.pressed.connect(func(): buy_button_pressed.emit(item))
+		buy_button.pressed.connect(func(): buy_button_pressed.emit(export))
 		h_box_container.add_child(item_price_label)
 		h_box_container.add_child(name_label)
 		h_box_container.add_child(buy_button)
 		sale_items.add_child(h_box_container)
 		
 		
-	for item in trade_inventory.willing_to_buy:
-		var price = trade_inventory.willing_to_buy[item]
-		if price == TradeInventory.NOT_AVAILABLE:
+	for import in trading_post.get_imports():
+		if not trading_post.is_importing(import):
 			continue
+		var price = trading_post.import_price_for(import)
 		var h_box_container: HBoxContainer = _new_centered_h_box_container()
 		var item_price_label = Label.new()
 		item_price_label.text = "$%d" % price
 		var name_label = Label.new()
-		name_label.text = Enums.TradeItem.find_key(item)
+		name_label.text = Enums.TradeItem.find_key(import)
 		var sell_button: Button = SHOP_BUTTON.instantiate()
-		sell_button.pressed.connect(func(): sell_button_pressed.emit(item))
+		sell_button.pressed.connect(func(): sell_button_pressed.emit(import))
 		sell_button.text = "Sell"
 		h_box_container.add_child(item_price_label)
 		h_box_container.add_child(name_label)

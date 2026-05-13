@@ -30,7 +30,7 @@ func _ready():
 	_acceleration_by_mode[SpeedMode.FAST] = acceleration_fast
 	
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	_handle_velocity()
 
 func increase_speed():

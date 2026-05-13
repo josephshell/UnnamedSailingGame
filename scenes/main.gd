@@ -35,7 +35,7 @@ func _on_trading_post_entered(trading_post: TradingPost, area: Area3D):
 	if area.is_in_group("player"):
 		_on_boat_player_arrived_at_post(trading_post)
 
-func _on_trading_post_exited(trading_post: TradingPost, area: Area3D):
+func _on_trading_post_exited(_trading_post: TradingPost, area: Area3D):
 	if area.is_in_group("player"):
 		_on_boat_player_left_post()
 
@@ -69,22 +69,15 @@ func get_first_sellable_item(trading_post: TradingPost) -> Enums.TradeItem:
 			return item
 	return Enums.TradeItem.NULL
 
-func can_player_afford(trade_item: Enums.TradeItem, at_shop: TradingPost) -> bool:
-	var cost = at_shop.trade_inventory.willing_to_sell[trade_item]
-	return cost != TradeInventory.NOT_AVAILABLE and player_trade_inventory.money >= cost
-
 func buy(trade_item: Enums.TradeItem, at_shop: TradingPost):
 	var abort_trade: bool = false
-	# check if shop sells trade_item
-	if not at_shop.is_item_for_sale(trade_item):
+	# check if shop exports trade_item
+	if not at_shop.is_exporting(trade_item):
 		print("Shop %s is not selling %s" % [at_shop.trading_post_name, Enums.TradeItem.find_key(trade_item)])
 		abort_trade = true
 		
-	# determine buy price
-	var buy_price = at_shop.trade_inventory.willing_to_sell.get_or_add(trade_item, TradeInventory.NOT_AVAILABLE)
-	if buy_price == TradeInventory.NOT_AVAILABLE:
-		print("Shop %s is not selling %s" % [at_shop.trading_post_name, Enums.TradeItem.find_key(trade_item)])
-		abort_trade = true
+	# get export price
+	var buy_price = at_shop.export_price_for(trade_item)
 	
 	# check if player can afford transaction
 	if player_trade_inventory.money < buy_price:
@@ -114,16 +107,13 @@ func buy(trade_item: Enums.TradeItem, at_shop: TradingPost):
 
 func sell(trade_item: Enums.TradeItem, at_shop: TradingPost):
 	var abort_trade: bool = false
-	# check if shop wants trade_item
-	if not at_shop.is_item_wanted(trade_item):
+	# check if shop imports trade_item
+	if not at_shop.is_importing(trade_item):
 		print("Shop %s is not buying %s" % [at_shop.trading_post_name, Enums.TradeItem.find_key(trade_item)])
 		abort_trade = true
 		
-	# determine sell price
-	var sale_price = at_shop.trade_inventory.willing_to_buy.get_or_add(trade_item, TradeInventory.NOT_AVAILABLE)
-	if sale_price == TradeInventory.NOT_AVAILABLE:
-		print("Shop %s is not buying %s" % [at_shop.trading_post_name, Enums.TradeItem.find_key(trade_item)])
-		abort_trade = true
+	# get import price
+	var sale_price = at_shop.import_price_for(trade_item)
 	
 	# check if shop can afford transaction
 	if at_shop.trade_inventory.money < sale_price:

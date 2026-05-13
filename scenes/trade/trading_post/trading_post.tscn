@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c4xlp33se5b2j"]
 
-[ext_resource type="Script" uid="uid://c1fh31vovoau0" path="res://scenes/trade/trading_post.gd" id="1_wg4ra"]
+[ext_resource type="Script" uid="uid://c1fh31vovoau0" path="res://scenes/trade/trading_post/trading_post.gd" id="1_wg4ra"]
 [ext_resource type="PackedScene" uid="uid://5yxwe2bglav7" path="res://Assets/trading_post/house_on_a_lake.fbx" id="2_ru3gy"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_w45kc"]
