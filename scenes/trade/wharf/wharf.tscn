@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://b6g1ukffxpx5a"]
+
+[ext_resource type="Script" uid="uid://c614gpxl0jq1b" path="res://scenes/trade/wharf/wharf.gd" id="1_0eywb"]
+[ext_resource type="PackedScene" uid="uid://5yxwe2bglav7" path="res://Assets/trading_post/house_on_a_lake.fbx" id="2_r4k14"]
+[ext_resource type="PackedScene" uid="uid://y06tx66edpwx" path="res://Assets/boat/ship-large.fbx" id="3_r4k14"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_w45kc"]
+radius = 20.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tvjid"]
+transparency = 1
+albedo_color = Color(0, 0.68235296, 0.68235296, 0.14509805)
+
+[sub_resource type="SphereMesh" id="SphereMesh_gay3b"]
+material = SubResource("StandardMaterial3D_tvjid")
+radius = 20.0
+height = 40.0
+
+[node name="Wharf" type="Area3D" unique_id=391553904]
+script = ExtResource("1_0eywb")
+metadata/_custom_type_script = "uid://c614gpxl0jq1b"
+
+[node name="TradingPostModel" parent="." unique_id=491054129 instance=ExtResource("2_r4k14")]
+transform = Transform3D(3.5715792, 0, -4.3326716, 0, 5.615, 0, 4.3326716, 0, 3.5715792, 0, 0, 0)
+
+[node name="ship-large" parent="TradingPostModel" unique_id=1873033932 instance=ExtResource("3_r4k14")]
+transform = Transform3D(0.41500002, 0, -1.4901161e-08, 0, 0.415, 0, 1.4901161e-08, 0, 0.41500002, 7.1473637, 0, -2.311089)
+
+[node name="ship-large2" parent="TradingPostModel" unique_id=312828004 instance=ExtResource("3_r4k14")]
+transform = Transform3D(0.31926385, 0, -0.26513332, 0, 0.41500002, 0, 0.26513332, 0, 0.31926385, -5.019056, 0, -3.6271484)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1812354718]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.48416138, 0, 3.7068634)
+shape = SubResource("SphereShape3D_w45kc")
+
+[node name="PortVisualizer" type="MeshInstance3D" parent="." unique_id=327860772]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.48416138, 0, 3.7068634)
+mesh = SubResource("SphereMesh_gay3b")
+
+[node name="Billboard" type="Label3D" parent="." unique_id=441048252]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.561363, 0, -8.010594)
+pixel_size = 0.2
+offset = Vector2(0, 118.525)
+billboard = 2
+text = "INSERT NAME HERE"

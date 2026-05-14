@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://sftnp5i05o1d" path="res://scenes/trade/price_provider.gd" id="9_bjd11"]
 [ext_resource type="PackedScene" uid="uid://ctlsw56iex0xt" path="res://scenes/player/player_hud.tscn" id="9_q8u5g"]
 [ext_resource type="Texture2D" uid="uid://cufbqx1wb1ke7" path="res://Assets/skybox/AllSkyFree_Sky_EpicBlueSunset_Equirect.png" id="11_wp0k4"]
+[ext_resource type="PackedScene" uid="uid://b6g1ukffxpx5a" path="res://scenes/trade/wharf/wharf.tscn" id="13_qmy6f"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_etftv"]
 transparency = 1
@@ -205,6 +206,11 @@ unique_name_in_owner = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=673783855]
 environment = SubResource("Environment_mwfav")
 camera_attributes = SubResource("CameraAttributesPractical_3p2gp")
+
+[node name="Wharf" parent="." unique_id=391553904 instance=ExtResource("13_qmy6f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 221.00714, 0, -4.1879272)
+wharf_name = "Big Ship Isle"
+ships_available = Array[String](["Frigate", "Teacup"])
 
 [connection signal="backwards_pressed" from="InputComponent" to="." method="_on_input_component_backwards_pressed"]
 [connection signal="exit_pressed" from="InputComponent" to="." method="_on_input_component_exit_pressed"]
