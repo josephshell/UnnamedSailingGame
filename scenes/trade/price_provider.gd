@@ -13,6 +13,8 @@ func populate_base_prices():
 				base_price = 10
 			Enums.TradeItem.RUM:
 				base_price = 10
+			Enums.TradeItem.NULL:
+				base_price = 0
 			_:
 				push_error("Item with no base price: ", Enums.TradeItem.find_key(item))
 				base_price = 0

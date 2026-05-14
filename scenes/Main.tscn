@@ -167,16 +167,16 @@ inventory = Dictionary[int, int]({
 })
 metadata/_custom_type_script = "uid://dbhhm8bhtqptl"
 
-[node name="CaféLoca2" parent="TradingPostContainer" unique_id=776951108 node_paths=PackedStringArray("trade_inventory") instance=ExtResource("4_qawyw")]
+[node name="CaféCrema" parent="TradingPostContainer" unique_id=776951108 node_paths=PackedStringArray("trade_inventory") instance=ExtResource("4_qawyw")]
 transform = Transform3D(0.3011386, 0, 0.9535804, 0, 1, 0, -0.9535804, 0, 0.3011386, 119.014084, -7.6293945e-06, -54.679855)
-trading_post_name = "CaféLoca"
+trading_post_name = "CaféCrema"
 trade_inventory = NodePath("TradeInventory")
 amount_to_import = Dictionary[int, int]({
 2: 10
 })
 _exports = Array[int]([1])
 
-[node name="TradeInventory" type="Node" parent="TradingPostContainer/CaféLoca2" unique_id=1910045580]
+[node name="TradeInventory" type="Node" parent="TradingPostContainer/CaféCrema" unique_id=1910045580]
 script = ExtResource("3_rcedf")
 inventory = Dictionary[int, int]({
 1: 10

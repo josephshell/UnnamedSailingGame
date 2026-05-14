@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Enums="*uid://d4mdbruwnwdjh"
+GlobalClasses="*uid://cpt2xb4hlfdoy"
 
 [input]
 

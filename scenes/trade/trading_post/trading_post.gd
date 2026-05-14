@@ -8,6 +8,8 @@ signal trading_post_exited(trading_post: TradingPost, area: Area3D)
 
 @onready var trading_post_billboard: Label3D = %TradingPostBillboard
 
+## A dictionary of [param TradeItem]s to the max quantity that this trading
+## post will import
 @export var amount_to_import: Dictionary[Enums.TradeItem, int] = {}
 @export var _exports: Array[Enums.TradeItem] = []
 
@@ -41,3 +43,10 @@ func import_price_for(trade_item: Enums.TradeItem) -> int:
 
 func export_price_for(trade_item: Enums.TradeItem) -> int:
 	return price_provider.get_export_price_for(trade_item, self)
+
+func get_imports_at_max_value() -> Array[Enums.TradeItem]:
+	var imports_at_max_value: Array[Enums.TradeItem] = []
+	for import in amount_to_import.keys():
+		if trade_inventory.inventory.get_or_add(import, 0) == 0:
+			imports_at_max_value.append(import)
+	return imports_at_max_value

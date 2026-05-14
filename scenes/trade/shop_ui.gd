@@ -33,7 +33,7 @@ func _ready():
 func _dismiss_rumor_container():
 	rumor_container.hide()
 	
-func _enable_rumor_container(rumor: TradingPostContainer.Rumor):
+func _enable_rumor_container(rumor: GlobalClasses.Rumor):
 	rumor_label.text = rumor.description
 	rumor_container.show()
 
@@ -109,7 +109,7 @@ func _new_centered_h_box_container() -> HBoxContainer:
 	container.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	return container
 
-func set_rumor(rumor: TradingPostContainer.Rumor):
+func set_rumor(rumor: GlobalClasses.Rumor):
 	if rumor:
 		_enable_rumor_container(rumor)
 	else:
