@@ -1,6 +1,13 @@
 class_name MovementComponent extends Node
 
+## The torque force applied to the ship when the wheel is turned
 @export var turning_torque: float = 1.0
+## The maximum speed in radians per second that the ship may turn
+@export var max_turning_speed: float = TAU / 10
+## The speed that the ship's wheel will turn when actively changing direction
+@export var turning_speed: float = 0.01
+## The speed that the ship's wheel will return to zero turn when controls are released
+@export var turning_drift: float = 0.01
 @export var speed_reverse: float = 5.0
 @export var acceleration_reverse: float = 20.0
 @export var speed_low: float = 5.0
@@ -14,6 +21,10 @@ var _speed_by_mode: Dictionary[SpeedMode, float] = {}
 var _acceleration_by_mode: Dictionary[SpeedMode, float] = {}
 
 var _speed_mode: SpeedMode = SpeedMode.NONE
+
+## The amount of turning done by the ship this frame. Like a ships steering wheel, it increases
+## and decreases slowly
+var _current_turn_amount: float = 0
 
 var boat: Boat
 
@@ -32,6 +43,7 @@ func _ready():
 
 func _physics_process(_delta):
 	_handle_velocity()
+	_handle_turning()
 
 func increase_speed():
 	if _speed_mode != SpeedMode.FAST:
@@ -55,11 +67,19 @@ func _handle_velocity():
 		forward_direction = -forward_direction if not _speed_mode == SpeedMode.REVERSE else forward_direction
 		boat.apply_central_force(forward_direction * _acceleration_by_mode[_speed_mode] * boat.mass)
 
-func on_turn_input(turn_amount: float):
-	_handle_turning(turn_amount, boat.linear_velocity.length())
+func on_turn_input(turn_input: float):
+	var turn_amount := 0.0
+	if turn_input == 0.0 and abs(_current_turn_amount) > 0.1:
+		var direction_to_zero_turn = -sign(_current_turn_amount)
+		turn_amount = turning_drift * direction_to_zero_turn
+	else:
+		turn_amount = turning_speed * turn_input
 
-func _handle_turning(turn_amount: float, boat_speed: float):
-	if turn_amount != 0:
+	_current_turn_amount = clampf(_current_turn_amount + turn_amount, -max_turning_speed, max_turning_speed)
+
+func _handle_turning():
+	var boat_speed = boat.linear_velocity.length()
+	if abs(_current_turn_amount) > 0.1:
 		var linear_turn_capability = clampf(boat_speed / _speed_by_mode[SpeedMode.FAST], 0.2, 1.0)
 		var dot_product = boat.linear_velocity.dot(_get_boat_forward_direction())
 		var is_moving_backwards = dot_product > 0.1
@@ -68,7 +88,7 @@ func _handle_turning(turn_amount: float, boat_speed: float):
 			torque_based_on_dir = turning_torque
 		else:
 			torque_based_on_dir = -turning_torque
-		boat.apply_torque(Vector3(0, turn_amount * torque_based_on_dir * linear_turn_capability, 0))
+		boat.apply_torque(Vector3(0, _current_turn_amount * torque_based_on_dir * linear_turn_capability, 0))
 
 enum SpeedMode {
 	REVERSE,
