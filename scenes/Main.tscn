@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c4xlp33se5b2j" path="res://scenes/trade/trading_post/trading_post.tscn" id="4_qawyw"]
 [ext_resource type="Script" uid="uid://c1xlsw4e8yell" path="res://scenes/player/movement_component.gd" id="4_rcedf"]
 [ext_resource type="PackedScene" uid="uid://b665daxdyt8i5" path="res://scenes/trade/shop_ui.tscn" id="6_2rkij"]
-[ext_resource type="Script" uid="uid://0130vi54b4dc" path="res://scenes/trade/trading_post_container.gd" id="8_lhr70"]
+[ext_resource type="Script" uid="uid://0130vi54b4dc" path="res://scenes/trade/shop_container.gd" id="8_lhr70"]
 [ext_resource type="PackedScene" uid="uid://b1qi60wyfkxxj" path="res://scenes/boat/boat.tscn" id="8_rcedf"]
 [ext_resource type="Script" uid="uid://sftnp5i05o1d" path="res://scenes/trade/price_provider.gd" id="9_bjd11"]
 [ext_resource type="PackedScene" uid="uid://ctlsw56iex0xt" path="res://scenes/player/player_hud.tscn" id="9_q8u5g"]
@@ -142,17 +142,17 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 98.13656, -0.021572113, 12.37447)
 
-[node name="TradingPostContainer" type="Node3D" parent="." unique_id=389840558 node_paths=PackedStringArray("price_provider")]
+[node name="ShopContainer" type="Node3D" parent="." unique_id=389840558 node_paths=PackedStringArray("price_provider")]
 unique_name_in_owner = true
 script = ExtResource("8_lhr70")
 price_provider = NodePath("PriceProvider")
 metadata/_custom_type_script = "uid://0130vi54b4dc"
 
-[node name="PriceProvider" type="Node" parent="TradingPostContainer" unique_id=1103409489]
+[node name="PriceProvider" type="Node" parent="ShopContainer" unique_id=1103409489]
 script = ExtResource("9_bjd11")
 metadata/_custom_type_script = "uid://sftnp5i05o1d"
 
-[node name="CaféLoca" parent="TradingPostContainer" unique_id=221879639 node_paths=PackedStringArray("trade_inventory") instance=ExtResource("4_qawyw")]
+[node name="CaféLoca" parent="ShopContainer" unique_id=221879639 node_paths=PackedStringArray("trade_inventory") instance=ExtResource("4_qawyw")]
 transform = Transform3D(0.3011386, 0, 0.9535804, 0, 1, 0, -0.9535804, 0, 0.3011386, -188.62154, -7.6293945e-06, -178.10767)
 trading_post_name = "CaféLoca"
 trade_inventory = NodePath("TradeInventory")
@@ -161,14 +161,14 @@ amount_to_import = Dictionary[int, int]({
 })
 _exports = Array[int]([1])
 
-[node name="TradeInventory" type="Node" parent="TradingPostContainer/CaféLoca" unique_id=428237467]
+[node name="TradeInventory" type="Node" parent="ShopContainer/CaféLoca" unique_id=428237467]
 script = ExtResource("3_rcedf")
 inventory = Dictionary[int, int]({
 1: 10
 })
 metadata/_custom_type_script = "uid://dbhhm8bhtqptl"
 
-[node name="CaféCrema" parent="TradingPostContainer" unique_id=776951108 node_paths=PackedStringArray("trade_inventory") instance=ExtResource("4_qawyw")]
+[node name="CaféCrema" parent="ShopContainer" unique_id=776951108 node_paths=PackedStringArray("trade_inventory") instance=ExtResource("4_qawyw")]
 transform = Transform3D(0.3011386, 0, 0.9535804, 0, 1, 0, -0.9535804, 0, 0.3011386, 119.014084, -7.6293945e-06, -54.679855)
 trading_post_name = "CaféCrema"
 trade_inventory = NodePath("TradeInventory")
@@ -177,14 +177,14 @@ amount_to_import = Dictionary[int, int]({
 })
 _exports = Array[int]([1])
 
-[node name="TradeInventory" type="Node" parent="TradingPostContainer/CaféCrema" unique_id=1910045580]
+[node name="TradeInventory" type="Node" parent="ShopContainer/CaféCrema" unique_id=1910045580]
 script = ExtResource("3_rcedf")
 inventory = Dictionary[int, int]({
 1: 10
 })
 metadata/_custom_type_script = "uid://dbhhm8bhtqptl"
 
-[node name="Tortungo" parent="TradingPostContainer" unique_id=1531211137 node_paths=PackedStringArray("trade_inventory") instance=ExtResource("4_qawyw")]
+[node name="Tortungo" parent="ShopContainer" unique_id=1531211137 node_paths=PackedStringArray("trade_inventory") instance=ExtResource("4_qawyw")]
 transform = Transform3D(-0.43006992, 0, -0.90279555, 0, 1, 0, 0.90279555, 0, -0.43006992, 92.73891, -7.6293945e-06, 69.89037)
 trading_post_name = "Tortungo"
 trade_inventory = NodePath("TradeInventory")
@@ -193,12 +193,17 @@ amount_to_import = Dictionary[int, int]({
 })
 _exports = Array[int]([2])
 
-[node name="TradeInventory" type="Node" parent="TradingPostContainer/Tortungo" unique_id=557591891]
+[node name="TradeInventory" type="Node" parent="ShopContainer/Tortungo" unique_id=557591891]
 script = ExtResource("3_rcedf")
 inventory = Dictionary[int, int]({
 2: 10
 })
 metadata/_custom_type_script = "uid://dbhhm8bhtqptl"
+
+[node name="Wharf" parent="ShopContainer" unique_id=391553904 instance=ExtResource("13_qmy6f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 221.00714, 0, -4.1879272)
+wharf_name = "Big Ship Isle"
+ships_available = Array[String](["Frigate", "Teacup"])
 
 [node name="PlayerHud" parent="." unique_id=1893105796 instance=ExtResource("9_q8u5g")]
 unique_name_in_owner = true
@@ -206,11 +211,6 @@ unique_name_in_owner = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=673783855]
 environment = SubResource("Environment_mwfav")
 camera_attributes = SubResource("CameraAttributesPractical_3p2gp")
-
-[node name="Wharf" parent="." unique_id=391553904 instance=ExtResource("13_qmy6f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 221.00714, 0, -4.1879272)
-wharf_name = "Big Ship Isle"
-ships_available = Array[String](["Frigate", "Teacup"])
 
 [connection signal="backwards_pressed" from="InputComponent" to="." method="_on_input_component_backwards_pressed"]
 [connection signal="exit_pressed" from="InputComponent" to="." method="_on_input_component_exit_pressed"]

@@ -6,7 +6,7 @@ extends Node3D
 
 @onready var player_hud: PlayerHUD = %PlayerHud
 
-@onready var trading_post_container: TradingPostContainer = %TradingPostContainer
+@onready var shop_container: ShopContainer = %ShopContainer
 
 @onready var player_trade_inventory: TradeInventory = %PlayerTradeInventory
 
@@ -25,7 +25,7 @@ func _ready() -> void:
 	player_hud.set_player_inventory(player_trade_inventory)
 	player_hud.set_speed(movement_component.get_speed_mode())
 	
-	for child in trading_post_container.get_children():
+	for child in shop_container.get_trading_posts():
 		if child is TradingPost:
 			child.trading_post_entered.connect(_on_trading_post_entered)
 			child.trading_post_exited.connect(_on_trading_post_exited)
@@ -157,7 +157,7 @@ func _on_shop_ui_sell_button_pressed(trade_item):
 		push_error("Cannot sell %s, no valid shop nearby" % Enums.TradeItem.find_key(trade_item))
 
 func _on_shop_ui_rumors_button_pressed(trading_post: TradingPost) -> void:
-	var all_rumors = trading_post_container.get_rumors(trading_post)
+	var all_rumors = shop_container.get_rumors(trading_post)
 	if all_rumors.is_empty():
 		print("No rumors available at trading post ", trading_post.trading_post_name)
 	else:

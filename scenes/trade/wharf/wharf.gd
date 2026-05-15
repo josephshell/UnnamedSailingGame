@@ -8,7 +8,7 @@ signal wharf_exited(wharf: Wharf, area: Area3D)
 
 @onready var billboard: Label3D = %Billboard
 
-var price_provider: PriceProvider
+var wharf_price_provider: WharfPriceProvider
 
 func _ready():
 	area_entered.connect(func(area): 
