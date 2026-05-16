@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://duo4rg3igxprv" path="res://scenes/float/float_component.gd" id="2_8s4rw"]
 [ext_resource type="Script" uid="uid://ej7dgddrftdw" path="res://scenes/float/buoy.gd" id="3_fjqcs"]
 [ext_resource type="PackedScene" uid="uid://y06tx66edpwx" path="res://Assets/boat/ship-large.fbx" id="4_1mvpx"]
+[ext_resource type="Script" uid="uid://n0d4t1f6ey7k" path="res://scenes/boat/movement_characteristics.gd" id="5_dr53j"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7boo4"]
 size = Vector3(8.72583, 1, 15.212761)
@@ -26,11 +27,12 @@ size = Vector3(2.594635, 1, 2.3781013)
 [sub_resource type="SphereShape3D" id="SphereShape3D_wqivs"]
 radius = 15.0
 
-[node name="Boat" type="RigidBody3D" unique_id=652707839]
+[node name="Boat" type="RigidBody3D" unique_id=652707839 node_paths=PackedStringArray("movement_characteristics")]
 gravity_scale = 0.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -2, 0)
 script = ExtResource("1_51e06")
+movement_characteristics = NodePath("MovementCharacteristics")
 metadata/_custom_type_script = "uid://bf068gmbjqsqk"
 
 [node name="FloatComponent" type="Node3D" parent="." unique_id=1317879653 node_paths=PackedStringArray("floatable", "buoys")]
@@ -94,3 +96,8 @@ unique_name_in_owner = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SenseArea" unique_id=1483282285]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.188936, -1.0708432)
 shape = SubResource("SphereShape3D_wqivs")
+
+[node name="MovementCharacteristics" type="Node" parent="." unique_id=389231384]
+script = ExtResource("5_dr53j")
+turning_torque = 100.0
+metadata/_custom_type_script = "uid://n0d4t1f6ey7k"

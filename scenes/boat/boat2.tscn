@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://c278o361p2bb3"]
+
+[ext_resource type="Script" uid="uid://bf068gmbjqsqk" path="res://scenes/boat/boat.gd" id="1_6eetj"]
+[ext_resource type="Script" uid="uid://duo4rg3igxprv" path="res://scenes/float/float_component.gd" id="2_ekgag"]
+[ext_resource type="Script" uid="uid://ej7dgddrftdw" path="res://scenes/float/buoy.gd" id="3_uou8c"]
+[ext_resource type="PackedScene" uid="uid://241ovsl6q5bq" path="res://Assets/boat2/boat-sail-a.fbx" id="4_6eetj"]
+[ext_resource type="Script" uid="uid://n0d4t1f6ey7k" path="res://scenes/boat/movement_characteristics.gd" id="5_ekgag"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7boo4"]
+size = Vector3(5.798279, 1, 12.225615)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wqivs"]
+radius = 10.89
+
+[node name="Boat2" type="RigidBody3D" unique_id=652707839 node_paths=PackedStringArray("movement_characteristics")]
+gravity_scale = 0.0
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, -2, 0)
+script = ExtResource("1_6eetj")
+movement_characteristics = NodePath("MovementCharacteristics")
+metadata/_custom_type_script = "uid://bf068gmbjqsqk"
+
+[node name="FloatComponent" type="Node3D" parent="." unique_id=1317879653 node_paths=PackedStringArray("floatable", "buoys")]
+script = ExtResource("2_ekgag")
+floatable = NodePath("..")
+buoys = [NodePath("Buoy"), NodePath("Buoy2"), NodePath("Buoy3"), NodePath("Buoy4")]
+metadata/_custom_type_script = "uid://duo4rg3igxprv"
+
+[node name="Buoy" type="Node3D" parent="FloatComponent" unique_id=1292990185]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.54876, 2.3452673, 5.2074323)
+script = ExtResource("3_uou8c")
+metadata/_custom_type_script = "uid://ej7dgddrftdw"
+
+[node name="Buoy2" type="Node3D" parent="FloatComponent" unique_id=1354272376]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7884178, 2.3452673, 5.1823606)
+script = ExtResource("3_uou8c")
+metadata/_custom_type_script = "uid://ej7dgddrftdw"
+
+[node name="Buoy3" type="Node3D" parent="FloatComponent" unique_id=1215163191]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.778699, 2.3452673, -6.229096)
+script = ExtResource("3_uou8c")
+metadata/_custom_type_script = "uid://ej7dgddrftdw"
+
+[node name="Buoy4" type="Node3D" parent="FloatComponent" unique_id=2133113339]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8819003, 2.3452673, -6.5111117)
+script = ExtResource("3_uou8c")
+metadata/_custom_type_script = "uid://ej7dgddrftdw"
+
+[node name="FbxModel" parent="." unique_id=192347199 instance=ExtResource("4_6eetj")]
+transform = Transform3D(3.34, 0, 0, 0, 3.34, 0, 0, 0, 3.34, 0, 0, 0)
+
+[node name="CollisionShapeDivider" type="Node" parent="." unique_id=88533179]
+
+[node name="MainDeck" type="CollisionShape3D" parent="." unique_id=1874838035]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00015068054, 2.5409112, 0.3143139)
+shape = SubResource("BoxShape3D_7boo4")
+
+[node name="SenseArea" type="Area3D" parent="." unique_id=83193780 groups=["player"]]
+unique_name_in_owner = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SenseArea" unique_id=1483282285]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.188936, -1.0708432)
+shape = SubResource("SphereShape3D_wqivs")
+
+[node name="MovementCharacteristics" type="Node" parent="." unique_id=491809945]
+script = ExtResource("5_ekgag")
+metadata/_custom_type_script = "uid://n0d4t1f6ey7k"

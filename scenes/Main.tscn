@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://ctlsw56iex0xt" path="res://scenes/player/player_hud.tscn" id="9_q8u5g"]
 [ext_resource type="Texture2D" uid="uid://cufbqx1wb1ke7" path="res://Assets/skybox/AllSkyFree_Sky_EpicBlueSunset_Equirect.png" id="11_wp0k4"]
 [ext_resource type="PackedScene" uid="uid://b6g1ukffxpx5a" path="res://scenes/trade/wharf/wharf.tscn" id="13_qmy6f"]
+[ext_resource type="PackedScene" uid="uid://c278o361p2bb3" path="res://scenes/boat/boat2.tscn" id="14_mwfav"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_etftv"]
 transparency = 1
@@ -49,7 +50,6 @@ script = ExtResource("2_jlsqs")
 [node name="MovementComponent" type="Node" parent="." unique_id=2013110661]
 unique_name_in_owner = true
 script = ExtResource("4_rcedf")
-turning_torque = 100.0
 metadata/_custom_type_script = "uid://c1xlsw4e8yell"
 
 [node name="CameraController" type="Node" parent="." unique_id=1466040527 node_paths=PackedStringArray("character", "camera")]
@@ -211,6 +211,9 @@ unique_name_in_owner = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=673783855]
 environment = SubResource("Environment_mwfav")
 camera_attributes = SubResource("CameraAttributesPractical_3p2gp")
+
+[node name="Boat2" parent="." unique_id=465670974 instance=ExtResource("14_mwfav")]
+transform = Transform3D(0.9925844, 0.12155752, 0, -0.12155752, 0.9925844, 0, 0, 0, 1, 91.13225, 11.496674, 38.687912)
 
 [connection signal="backwards_pressed" from="InputComponent" to="." method="_on_input_component_backwards_pressed"]
 [connection signal="exit_pressed" from="InputComponent" to="." method="_on_input_component_exit_pressed"]

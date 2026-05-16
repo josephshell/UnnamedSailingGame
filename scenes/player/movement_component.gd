@@ -1,22 +1,5 @@
 class_name MovementComponent extends Node
 
-## The torque force applied to the ship when the wheel is turned
-@export var turning_torque: float = 1.0
-## The maximum speed in radians per second that the ship may turn
-@export var max_turning_speed: float = TAU / 10
-## The speed that the ship's wheel will turn when actively changing direction
-@export var turning_speed: float = 0.01
-## The speed that the ship's wheel will return to zero turn when controls are released
-@export var turning_drift: float = 0.01
-@export var speed_reverse: float = 5.0
-@export var acceleration_reverse: float = 20.0
-@export var speed_low: float = 5.0
-@export var acceleration_low: float = 20.0
-@export var speed_medium: float = 8.0
-@export var acceleration_medium: float = 30.0
-@export var speed_fast: float = 13.0
-@export var acceleration_fast: float = 50.0
-
 var _speed_by_mode: Dictionary[SpeedMode, float] = {}
 var _acceleration_by_mode: Dictionary[SpeedMode, float] = {}
 
@@ -26,19 +9,21 @@ var _speed_mode: SpeedMode = SpeedMode.NONE
 ## and decreases slowly
 var _current_turn_amount: float = 0
 
-var boat: Boat
+@onready var boat: Boat = %Boat
 
 func _ready():
+	await boat.ready
+	var stats = boat.movement_characteristics
 	_speed_by_mode[SpeedMode.NONE] = 0.0
-	_speed_by_mode[SpeedMode.REVERSE] = speed_reverse
-	_speed_by_mode[SpeedMode.LOW] = speed_low
-	_speed_by_mode[SpeedMode.MEDIUM] = speed_medium
-	_speed_by_mode[SpeedMode.FAST] = speed_fast
+	_speed_by_mode[SpeedMode.REVERSE] = stats.speed_reverse
+	_speed_by_mode[SpeedMode.LOW] = stats.speed_low
+	_speed_by_mode[SpeedMode.MEDIUM] = stats.speed_medium
+	_speed_by_mode[SpeedMode.FAST] = stats.speed_fast
 	_acceleration_by_mode[SpeedMode.NONE] = 0.0
-	_acceleration_by_mode[SpeedMode.REVERSE] = acceleration_reverse
-	_acceleration_by_mode[SpeedMode.LOW] = acceleration_low
-	_acceleration_by_mode[SpeedMode.MEDIUM] = acceleration_medium
-	_acceleration_by_mode[SpeedMode.FAST] = acceleration_fast
+	_acceleration_by_mode[SpeedMode.REVERSE] = stats.acceleration_reverse
+	_acceleration_by_mode[SpeedMode.LOW] = stats.acceleration_low
+	_acceleration_by_mode[SpeedMode.MEDIUM] = stats.acceleration_medium
+	_acceleration_by_mode[SpeedMode.FAST] = stats.acceleration_fast
 	
 
 func _physics_process(_delta):
@@ -71,11 +56,11 @@ func on_turn_input(turn_input: float):
 	var turn_amount := 0.0
 	if turn_input == 0.0 and abs(_current_turn_amount) > 0.1:
 		var direction_to_zero_turn = -sign(_current_turn_amount)
-		turn_amount = turning_drift * direction_to_zero_turn
+		turn_amount = boat.movement_characteristics.turning_drift * direction_to_zero_turn
 	else:
-		turn_amount = turning_speed * turn_input
+		turn_amount = boat.movement_characteristics.turning_speed * turn_input
 
-	_current_turn_amount = clampf(_current_turn_amount + turn_amount, -max_turning_speed, max_turning_speed)
+	_current_turn_amount = clampf(_current_turn_amount + turn_amount, -boat.movement_characteristics.max_turning_speed, boat.movement_characteristics.max_turning_speed)
 
 func _handle_turning():
 	var boat_speed = boat.linear_velocity.length()
@@ -85,9 +70,9 @@ func _handle_turning():
 		var is_moving_backwards = dot_product > 0.1
 		var torque_based_on_dir: float
 		if is_moving_backwards:
-			torque_based_on_dir = turning_torque
+			torque_based_on_dir = boat.movement_characteristics.turning_torque
 		else:
-			torque_based_on_dir = -turning_torque
+			torque_based_on_dir = -boat.movement_characteristics.turning_torque
 		boat.apply_torque(Vector3(0, _current_turn_amount * torque_based_on_dir * linear_turn_capability, 0))
 
 enum SpeedMode {

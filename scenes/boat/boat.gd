@@ -2,6 +2,7 @@ class_name Boat extends RigidBody3D
 
 @export var water_drag: float = 0.05
 @export var water_angular_drag: float = 0.05
+@export var movement_characteristics: MovementCharacteristics
 
 var is_submerged: bool = false
 
