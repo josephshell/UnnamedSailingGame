@@ -4,6 +4,8 @@ class_name Boat extends RigidBody3D
 @export var water_angular_drag: float = 0.05
 @export var movement_characteristics: MovementCharacteristics
 
+@onready var sense_area = %SenseArea
+
 var is_submerged: bool = false
 
 func set_submerged(value: bool):

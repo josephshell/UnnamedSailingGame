@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 Enums="*uid://d4mdbruwnwdjh"
 GlobalClasses="*uid://cpt2xb4hlfdoy"
 
+[global_group]
+
+player=""
+
 [input]
 
 move_forward={

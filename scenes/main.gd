@@ -24,6 +24,7 @@ func _ready() -> void:
 	movement_component.boat = boat
 	player_hud.set_player_inventory(player_trade_inventory)
 	player_hud.set_speed(movement_component.get_speed_mode())
+	boat.sense_area.add_to_group("player")
 	
 	for child in shop_container.get_trading_posts():
 		if child is TradingPost:
