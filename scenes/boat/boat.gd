@@ -1,5 +1,6 @@
 class_name Boat extends RigidBody3D
 
+@export var ship_type: Enums.Ships
 @export var water_drag: float = 0.05
 @export var water_angular_drag: float = 0.05
 @export var movement_characteristics: MovementCharacteristics

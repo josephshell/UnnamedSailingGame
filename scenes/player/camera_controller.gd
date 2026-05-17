@@ -18,7 +18,7 @@ var is_camera_locked: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if not character or not camera:
+	if not camera:
 		push_error("Error in camera controller ready. Character: ", character, " camera: ", camera)
 		return
 

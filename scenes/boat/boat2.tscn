@@ -17,6 +17,7 @@ gravity_scale = 0.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -2, 0)
 script = ExtResource("1_6eetj")
+ship_type = 1
 movement_characteristics = NodePath("MovementCharacteristics")
 metadata/_custom_type_script = "uid://bf068gmbjqsqk"
 
@@ -64,4 +65,8 @@ shape = SubResource("SphereShape3D_wqivs")
 
 [node name="MovementCharacteristics" type="Node" parent="." unique_id=491809945]
 script = ExtResource("5_ekgag")
+turning_torque = 100.0
+max_turning_speed = 0.419
+turning_speed = 0.008
+turning_drift = 0.005
 metadata/_custom_type_script = "uid://n0d4t1f6ey7k"

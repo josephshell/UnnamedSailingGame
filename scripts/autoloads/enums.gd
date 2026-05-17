@@ -10,3 +10,8 @@ enum TradeItem {
 	COFFEE,
 	RUM
 }
+
+enum Ships {
+	BIG_SHIP,
+	SMALL_SHIP
+}

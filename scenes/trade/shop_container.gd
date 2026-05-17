@@ -17,6 +17,9 @@ func _ready():
 func get_trading_posts() -> Array[TradingPost]:
 	return trading_posts
 
+func get_wharfs() -> Array[Wharf]:
+	return wharfs
+
 func get_rumors(current_trading_post: TradingPost) -> Array[GlobalClasses.Rumor]:
 	var rumors: Array[GlobalClasses.Rumor] = []
 	for trading_post in trading_posts:
@@ -31,7 +34,7 @@ func get_rumors(current_trading_post: TradingPost) -> Array[GlobalClasses.Rumor]
 			))
 	for wharf in wharfs:
 		var wharf_name := wharf.wharf_name
-		var ships := ", ".join(wharf.get_ships_available())
+		var ships := ", ".join(wharf.get_ships_available().map(func(ship): return Enums.Ships.find_key(ship)))
 		rumors.append(GlobalClasses.Rumor.new(
 			"%s is selling the following ships %s" % [wharf_name, ships],
 			wharf

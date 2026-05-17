@@ -4,7 +4,7 @@ signal wharf_entered(wharf: Wharf, area: Area3D)
 signal wharf_exited(wharf: Wharf, area: Area3D)
 
 @export var wharf_name: String = "UNNAMED"
-@export var ships_available: Array[String] = []
+@export var ships_available: Array[Enums.Ships] = []
 
 @onready var billboard: Label3D = %Billboard
 
@@ -19,5 +19,5 @@ func _ready():
 	)
 	billboard.text = wharf_name
 
-func get_ships_available() -> Array[String]:
+func get_ships_available() -> Array[Enums.Ships]:
 	return ships_available

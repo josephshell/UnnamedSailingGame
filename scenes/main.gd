@@ -1,5 +1,10 @@
 extends Node3D
 
+const BIG_SHIP = preload("uid://b1qi60wyfkxxj")
+const SMALL_SHIP = preload("uid://c278o361p2bb3")
+
+const PLAYER_GROUP = &"player"
+
 @onready var shop_ui: ShopUI = %ShopUI
 @onready var shop_name_ui = %ShopNameUI
 @onready var shop_name_label = %ShopNameLabel
@@ -12,32 +17,72 @@ extends Node3D
 
 @onready var movement_component: MovementComponent = %MovementComponent
 @onready var camera_controller = %CameraController
-@onready var boat: Boat = %Boat
 
 var near_shop: TradingPost
+var near_wharf: Wharf
+
+var boat: Boat
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	disable_shop_menu()
 	shop_name_ui.hide()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	movement_component.boat = boat
+	configure_new_boat(null, Enums.Ships.SMALL_SHIP)
 	player_hud.set_player_inventory(player_trade_inventory)
 	player_hud.set_speed(movement_component.get_speed_mode())
-	boat.sense_area.add_to_group("player")
 	
 	for child in shop_container.get_trading_posts():
 		if child is TradingPost:
 			child.trading_post_entered.connect(_on_trading_post_entered)
 			child.trading_post_exited.connect(_on_trading_post_exited)
+	
+	for child in shop_container.get_wharfs():
+		if child is Wharf:
+			child.wharf_entered.connect(_on_wharf_entered)
+			child.wharf_exited.connect(_on_wharf_exited)
+
+func configure_new_boat(old_boat: Boat, new_ship_type: Enums.Ships):
+	var new_boat: Boat = instantiate_boat_from_type(new_ship_type)
+	if not new_boat:
+		push_error("Failed to configure new boat from ship type: ", new_ship_type)
+		return
+	if old_boat:
+		var old_position := old_boat.position
+		var old_rotation := old_boat.rotation
+		flush_shop_detection()
+		old_boat.sense_area.remove_from_group(PLAYER_GROUP)
+		old_boat.queue_free()
+		new_boat.position = old_position
+		new_boat.rotation = old_rotation
+	add_child(new_boat)
+	movement_component.configure(new_boat)
+	camera_controller.character = new_boat
+	new_boat.sense_area.add_to_group(PLAYER_GROUP)
+	boat = new_boat
+
+func instantiate_boat_from_type(ship_type: Enums.Ships) -> Boat:
+	var new_boat: Boat
+	match ship_type:
+		Enums.Ships.BIG_SHIP:
+			new_boat = BIG_SHIP.instantiate()
+		Enums.Ships.SMALL_SHIP:
+			new_boat = SMALL_SHIP.instantiate()
+		_:
+			pass
+	return new_boat
+
+func flush_shop_detection():
+	_on_boat_player_left_post()
+	_on_boat_player_left_wharf()
 
 #region TradingPost Signals
 func _on_trading_post_entered(trading_post: TradingPost, area: Area3D):
-	if area.is_in_group("player"):
+	if area.is_in_group(PLAYER_GROUP):
 		_on_boat_player_arrived_at_post(trading_post)
 
 func _on_trading_post_exited(_trading_post: TradingPost, area: Area3D):
-	if area.is_in_group("player"):
+	if area.is_in_group(PLAYER_GROUP):
 		_on_boat_player_left_post()
 
 func _on_boat_player_arrived_at_post(trading_post: TradingPost):
@@ -49,7 +94,26 @@ func _on_boat_player_arrived_at_post(trading_post: TradingPost):
 func _on_boat_player_left_post():
 	disable_shop_menu()
 	near_shop = null
+#endregion
 
+#region Wharf Signals
+func _on_wharf_entered(wharf: Wharf, area: Area3D):
+	if area.is_in_group(PLAYER_GROUP):
+		_on_boat_player_arrived_at_wharf(wharf)
+
+func _on_wharf_exited(wharf: Wharf, area: Area3D):
+	if area.is_in_group(PLAYER_GROUP):
+		_on_boat_player_left_wharf()
+
+func _on_boat_player_arrived_at_wharf(wharf: Wharf):
+	shop_name_label.text = "WELCOME TO %s" % wharf.wharf_name
+	shop_ui.toggle_tutorial_popup(true)
+	shop_name_ui.show()
+	near_wharf = wharf
+
+func _on_boat_player_left_wharf():
+	disable_shop_menu()
+	near_wharf = null
 #endregion
 
 func capture_mouse():
@@ -200,6 +264,15 @@ func _on_input_component_toggle_inventory_pressed():
 func _on_input_component_interact_pressed():
 	if near_shop:
 		initiate_shop_menu()
+	if near_wharf:
+		var current_boat: Boat = boat
+		var available_boats: Array[Enums.Ships] = near_wharf.get_ships_available()
+		var non_active_boats: Array[Enums.Ships] = available_boats.filter(func(ship_type): return ship_type != current_boat.ship_type)
+		if non_active_boats.size() > 0:
+			var new_ship_type = non_active_boats.pick_random()
+			configure_new_boat(current_boat, new_ship_type)
+		else:
+			push_error("Cannot swap boats, no different ship type available at destination wharf.")
 
 #endregion
 

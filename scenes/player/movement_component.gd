@@ -9,11 +9,10 @@ var _speed_mode: SpeedMode = SpeedMode.NONE
 ## and decreases slowly
 var _current_turn_amount: float = 0
 
-@onready var boat: Boat = %Boat
+var boat: Boat
 
-func _ready():
-	await boat.ready
-	var stats = boat.movement_characteristics
+func configure(new_boat: Boat):
+	var stats: MovementCharacteristics = new_boat.movement_characteristics
 	_speed_by_mode[SpeedMode.NONE] = 0.0
 	_speed_by_mode[SpeedMode.REVERSE] = stats.speed_reverse
 	_speed_by_mode[SpeedMode.LOW] = stats.speed_low
@@ -24,9 +23,12 @@ func _ready():
 	_acceleration_by_mode[SpeedMode.LOW] = stats.acceleration_low
 	_acceleration_by_mode[SpeedMode.MEDIUM] = stats.acceleration_medium
 	_acceleration_by_mode[SpeedMode.FAST] = stats.acceleration_fast
+	boat = new_boat
 	
 
 func _physics_process(_delta):
+	if not boat:
+		return
 	_handle_velocity()
 	_handle_turning()
 
@@ -41,6 +43,18 @@ func decrease_speed():
 func get_speed_mode() -> SpeedMode:
 	return _speed_mode
 
+func on_turn_input(turn_input: float):
+	if not boat:
+		return
+	var turn_amount := 0.0
+	if turn_input == 0.0 and abs(_current_turn_amount) > 0.1:
+		var direction_to_zero_turn = -sign(_current_turn_amount)
+		turn_amount = boat.movement_characteristics.turning_drift * direction_to_zero_turn
+	else:
+		turn_amount = boat.movement_characteristics.turning_speed * turn_input
+
+	_current_turn_amount = clampf(_current_turn_amount + turn_amount, -boat.movement_characteristics.max_turning_speed, boat.movement_characteristics.max_turning_speed)
+
 ## TODO: Front of ship needs to be pointing along the -Z axis
 func _get_boat_forward_direction() -> Vector3:
 	return boat.global_basis * Vector3.FORWARD
@@ -51,16 +65,6 @@ func _handle_velocity():
 	if boat_speed <= _speed_by_mode[_speed_mode]:
 		forward_direction = -forward_direction if not _speed_mode == SpeedMode.REVERSE else forward_direction
 		boat.apply_central_force(forward_direction * _acceleration_by_mode[_speed_mode] * boat.mass)
-
-func on_turn_input(turn_input: float):
-	var turn_amount := 0.0
-	if turn_input == 0.0 and abs(_current_turn_amount) > 0.1:
-		var direction_to_zero_turn = -sign(_current_turn_amount)
-		turn_amount = boat.movement_characteristics.turning_drift * direction_to_zero_turn
-	else:
-		turn_amount = boat.movement_characteristics.turning_speed * turn_input
-
-	_current_turn_amount = clampf(_current_turn_amount + turn_amount, -boat.movement_characteristics.max_turning_speed, boat.movement_characteristics.max_turning_speed)
 
 func _handle_turning():
 	var boat_speed = boat.linear_velocity.length()
