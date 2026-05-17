@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c1fh31vovoau0" path="res://scenes/trade/trading_post/trading_post.gd" id="1_wg4ra"]
 [ext_resource type="PackedScene" uid="uid://5yxwe2bglav7" path="res://Assets/trading_post/house_on_a_lake.fbx" id="2_ru3gy"]
+[ext_resource type="PackedScene" uid="uid://dwc1qyow6c7eb" path="res://Assets/environment/market_stall.fbx" id="3_2vvtk"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_w45kc"]
 radius = 20.0
@@ -38,3 +39,9 @@ pixel_size = 0.2
 offset = Vector2(0, 118.525)
 billboard = 2
 text = "INSERT NAME HERE"
+
+[node name="market_stall" parent="." unique_id=2018841855 instance=ExtResource("3_2vvtk")]
+transform = Transform3D(-0.26415926, 0, -0.9644791, 0, 1, 0, 0.9644791, 0, -0.26415926, -1.976594, 2.2493358, -17.852749)
+
+[node name="market_stall2" parent="." unique_id=1123009418 instance=ExtResource("3_2vvtk")]
+transform = Transform3D(-0.26415926, 0, -0.9644791, 0, 1, 0, 0.9644791, 0, -0.26415926, -9.705888, 2.2493358, -15.014751)
