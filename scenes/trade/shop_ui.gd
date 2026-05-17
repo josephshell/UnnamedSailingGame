@@ -5,8 +5,6 @@ signal sell_button_pressed(trade_item: Enums.TradeItem)
 signal rumors_button_pressed(trading_post: TradingPost)
 signal exit_menu_button_pressed
 
-@export var price_provider: PriceProvider
-
 @onready var inventory_items: VBoxContainer = %InventoryItems
 @onready var sale_items: VBoxContainer = %SaleItems
 @onready var buy_items: VBoxContainer = %BuyItems
