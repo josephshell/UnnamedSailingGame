@@ -18,6 +18,7 @@ const PLAYER_GROUP = &"player"
 
 @onready var movement_component: MovementComponent = %MovementComponent
 @onready var camera_controller = %CameraController
+@onready var wind_manager: WindManager = %WindManager
 
 var near_shop: TradingPost
 var near_wharf: Wharf
@@ -60,6 +61,7 @@ func configure_new_boat(old_boat: Boat, new_ship_type: Enums.Ships):
 	movement_component.configure(new_boat)
 	camera_controller.character = new_boat
 	new_boat.sense_area.add_to_group(PLAYER_GROUP)
+	new_boat.wind_indicator.wind_manager = wind_manager
 	boat = new_boat
 
 func instantiate_boat_from_type(ship_type: Enums.Ships) -> Boat:

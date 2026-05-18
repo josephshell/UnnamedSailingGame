@@ -13,13 +13,16 @@ size = Vector3(5.798279, 1, 12.225615)
 [sub_resource type="SphereShape3D" id="SphereShape3D_wqivs"]
 radius = 10.89
 
-[node name="Boat2" type="RigidBody3D" unique_id=652707839 node_paths=PackedStringArray("movement_characteristics")]
+[node name="Boat2" type="RigidBody3D" unique_id=652707839 node_paths=PackedStringArray("movement_characteristics", "wind_indicator")]
 gravity_scale = 0.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -2, 0)
 script = ExtResource("1_6eetj")
 ship_type = 1
+water_drag = null
+water_angular_drag = null
 movement_characteristics = NodePath("MovementCharacteristics")
+wind_indicator = NodePath("WindIndicator")
 metadata/_custom_type_script = "uid://bf068gmbjqsqk"
 
 [node name="FloatComponent" type="Node3D" parent="." unique_id=1317879653 node_paths=PackedStringArray("floatable", "buoys")]
@@ -73,4 +76,5 @@ turning_drift = 0.005
 metadata/_custom_type_script = "uid://n0d4t1f6ey7k"
 
 [node name="WindIndicator" parent="." unique_id=777268661 instance=ExtResource("6_uou8c")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1.0000051, 0, 0, 0, 1.0000061, -1.4305115e-06, 4.5543337, -8.372297)

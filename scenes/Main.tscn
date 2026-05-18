@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dubgq6gn5irln" path="res://scenes/main.gd" id="1_fp6jq"]
 [ext_resource type="Script" uid="uid://dffadmx7nqmsr" path="res://scripts/input_component.gd" id="2_jlsqs"]
+[ext_resource type="Script" uid="uid://bgsrnhpodejvd" path="res://scenes/wind/wind_manager.gd" id="2_mwfav"]
 [ext_resource type="Script" uid="uid://dbhhm8bhtqptl" path="res://scenes/trade/trade_inventory.gd" id="3_rcedf"]
 [ext_resource type="Script" uid="uid://qansd3eut74p" path="res://scenes/player/camera_controller.gd" id="4_bl3fu"]
 [ext_resource type="PackedScene" uid="uid://c4xlp33se5b2j" path="res://scenes/trade/trading_post/trading_post.tscn" id="4_qawyw"]
@@ -42,6 +43,11 @@ sky = SubResource("Sky_qmy6f")
 
 [node name="Main" type="Node3D" unique_id=51395407]
 script = ExtResource("1_fp6jq")
+
+[node name="WindManager" type="Node" parent="." unique_id=1755390310]
+unique_name_in_owner = true
+script = ExtResource("2_mwfav")
+metadata/_custom_type_script = "uid://bgsrnhpodejvd"
 
 [node name="InputComponent" type="Node" parent="." unique_id=197509964]
 script = ExtResource("2_jlsqs")

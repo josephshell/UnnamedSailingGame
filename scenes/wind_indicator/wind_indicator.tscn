@@ -12,8 +12,9 @@ emission = Color(0.3566904, 0.8049552, 0.3689158, 1)
 material = SubResource("StandardMaterial3D_ekgag")
 size = Vector3(1, 2.39, 0.52)
 
-[node name="WindIndicator" type="Node3D" unique_id=777268661]
+[node name="WindIndicator" type="Node3D" unique_id=1258986131]
 script = ExtResource("1_4shik")
+metadata/_custom_type_script = "uid://dolqcnfu3jksu"
 
 [node name="WindIndicatorArrow" type="MeshInstance3D" parent="." unique_id=851353291]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)

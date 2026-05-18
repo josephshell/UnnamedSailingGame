@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://ej7dgddrftdw" path="res://scenes/float/buoy.gd" id="3_adu7p"]
 [ext_resource type="PackedScene" uid="uid://c0bmgd2dk7xa7" path="res://Assets/mega_boat/mega_boat.fbx" id="4_h7vh6"]
 [ext_resource type="Script" uid="uid://n0d4t1f6ey7k" path="res://scenes/boat/movement_characteristics.gd" id="5_ki3wy"]
+[ext_resource type="PackedScene" uid="uid://b7xeh8oltohc7" path="res://scenes/wind_indicator/wind_indicator.tscn" id="6_cldr0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7boo4"]
 size = Vector3(10.024231, 1, 30.306364)
@@ -15,12 +16,13 @@ size = Vector3(7.7404785, 3.3013306, 23.316017)
 [sub_resource type="SphereShape3D" id="SphereShape3D_wqivs"]
 radius = 15.0
 
-[node name="Boat" type="RigidBody3D" unique_id=652707839 node_paths=PackedStringArray("movement_characteristics")]
+[node name="Boat" type="RigidBody3D" unique_id=652707839 node_paths=PackedStringArray("movement_characteristics", "wind_indicator")]
 gravity_scale = 0.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -2, 0)
 script = ExtResource("1_h7vh6")
 movement_characteristics = NodePath("MovementCharacteristics")
+wind_indicator = NodePath("WindIndicator")
 metadata/_custom_type_script = "uid://bf068gmbjqsqk"
 
 [node name="FloatComponent" type="Node3D" parent="." unique_id=1317879653 node_paths=PackedStringArray("floatable", "buoys")]
@@ -77,3 +79,6 @@ shape = SubResource("SphereShape3D_wqivs")
 script = ExtResource("5_ki3wy")
 turning_torque = 100.0
 metadata/_custom_type_script = "uid://n0d4t1f6ey7k"
+
+[node name="WindIndicator" parent="." unique_id=1258986131 instance=ExtResource("6_cldr0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.857463, -21.213879)
