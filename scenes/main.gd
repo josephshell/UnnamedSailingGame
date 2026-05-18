@@ -2,6 +2,7 @@ extends Node3D
 
 const BIG_SHIP = preload("uid://b1qi60wyfkxxj")
 const SMALL_SHIP = preload("uid://c278o361p2bb3")
+const MEGA_SHIP = preload("uid://b0pc4s7mdnda5")
 
 const PLAYER_GROUP = &"player"
 
@@ -68,6 +69,8 @@ func instantiate_boat_from_type(ship_type: Enums.Ships) -> Boat:
 			new_boat = BIG_SHIP.instantiate()
 		Enums.Ships.SMALL_SHIP:
 			new_boat = SMALL_SHIP.instantiate()
+		Enums.Ships.MEGA_SHIP:
+			new_boat = MEGA_SHIP.instantiate()
 		_:
 			pass
 	return new_boat

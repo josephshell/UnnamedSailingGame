@@ -202,7 +202,7 @@ metadata/_custom_type_script = "uid://dbhhm8bhtqptl"
 [node name="Wharf" parent="ShopContainer" unique_id=391553904 instance=ExtResource("13_qmy6f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 221.00714, 0, -4.1879272)
 wharf_name = "Big Ship Isle"
-ships_available = Array[int]([0, 1])
+ships_available = Array[int]([0, 1, 2])
 
 [node name="PlayerHud" parent="." unique_id=1893105796 instance=ExtResource("9_q8u5g")]
 unique_name_in_owner = true

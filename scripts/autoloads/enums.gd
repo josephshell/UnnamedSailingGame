@@ -13,5 +13,6 @@ enum TradeItem {
 
 enum Ships {
 	BIG_SHIP,
-	SMALL_SHIP
+	SMALL_SHIP,
+	MEGA_SHIP
 }
