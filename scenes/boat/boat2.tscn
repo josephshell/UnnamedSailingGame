@@ -5,22 +5,13 @@
 [ext_resource type="Script" uid="uid://ej7dgddrftdw" path="res://scenes/float/buoy.gd" id="3_uou8c"]
 [ext_resource type="PackedScene" uid="uid://241ovsl6q5bq" path="res://Assets/boat2/boat-sail-a.fbx" id="4_6eetj"]
 [ext_resource type="Script" uid="uid://n0d4t1f6ey7k" path="res://scenes/boat/movement_characteristics.gd" id="5_ekgag"]
+[ext_resource type="PackedScene" uid="uid://b7xeh8oltohc7" path="res://scenes/wind_indicator/wind_indicator.tscn" id="6_uou8c"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7boo4"]
 size = Vector3(5.798279, 1, 12.225615)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wqivs"]
 radius = 10.89
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ekgag"]
-transparency = 1
-albedo_color = Color(0.38018683, 0.7202103, 0.34272662, 0.9882353)
-emission_enabled = true
-emission = Color(0.3566904, 0.8049552, 0.3689158, 1)
-
-[sub_resource type="PrismMesh" id="PrismMesh_uou8c"]
-material = SubResource("StandardMaterial3D_ekgag")
-size = Vector3(1, 2.39, 0.52)
 
 [node name="Boat2" type="RigidBody3D" unique_id=652707839 node_paths=PackedStringArray("movement_characteristics")]
 gravity_scale = 0.0
@@ -81,8 +72,5 @@ turning_speed = 0.008
 turning_drift = 0.005
 metadata/_custom_type_script = "uid://n0d4t1f6ey7k"
 
-[node name="WindIndicator" type="Node3D" parent="." unique_id=960732105]
-
-[node name="WindIndicatorArrow" type="MeshInstance3D" parent="WindIndicator" unique_id=2096406782]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 4.5542216, -8.37212)
-mesh = SubResource("PrismMesh_uou8c")
+[node name="WindIndicator" parent="." unique_id=777268661 instance=ExtResource("6_uou8c")]
+transform = Transform3D(1, 0, 0, 0, 1.0000051, 0, 0, 0, 1.0000061, -1.4305115e-06, 4.5543337, -8.372297)

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://b7xeh8oltohc7"]
+
+[ext_resource type="Script" uid="uid://dolqcnfu3jksu" path="res://scenes/wind_indicator/wind_indicator.gd" id="1_4shik"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ekgag"]
+transparency = 1
+albedo_color = Color(0.38018683, 0.7202103, 0.34272662, 0.9882353)
+emission_enabled = true
+emission = Color(0.3566904, 0.8049552, 0.3689158, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_uou8c"]
+material = SubResource("StandardMaterial3D_ekgag")
+size = Vector3(1, 2.39, 0.52)
+
+[node name="WindIndicator" type="Node3D" unique_id=777268661]
+script = ExtResource("1_4shik")
+
+[node name="WindIndicatorArrow" type="MeshInstance3D" parent="." unique_id=851353291]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_uou8c")
